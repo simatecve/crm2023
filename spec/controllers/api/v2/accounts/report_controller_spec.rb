@@ -9,11 +9,11 @@ RSpec.describe 'Reports API', type: :request do
   let(:inbox_member) { create(:inbox_member, user: user, inbox: inbox) }
   let(:default_timezone) { ActiveSupport::TimeZone[0]&.name }
   let(:date_timestamp) { Time.current.in_time_zone(default_timezone).beginning_of_day.to_i }
-  let(:params) { { timezone_offset: Time.zone.utc_offset } }
+  let(:params) { { timezone_offset: Time.current.in_time_zone(default_timezone).utc_offset } }
 
   before do
     create_list(:conversation, 10, account: account, inbox: inbox,
-                                   assignee: user, created_at: Time.zone.today)
+                                   assignee: user)
   end
 
   describe 'GET /api/v2/accounts/:account_id/reports/account' do
@@ -53,7 +53,7 @@ RSpec.describe 'Reports API', type: :request do
         expect(response).to have_http_status(:success)
         json_response = JSON.parse(response.body)
 
-        current_day_metric = json_response.select { |x| x['timestamp'] == date_timestamp }
+        current_day_metric = json_response.select { |x| Time.at(x['timestamp']).utc.day == Time.at(date_timestamp).utc.day }
         expect(current_day_metric.length).to eq(1)
         expect(current_day_metric[0]['value']).to eq(10)
       end
