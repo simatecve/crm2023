@@ -14,7 +14,9 @@
             "CONVERSATION_UPDATED": "Conversation Updated",
             "MESSAGE_CREATED": "Message created",
             "MESSAGE_UPDATED": "Message updated",
-            "WEBWIDGET_TRIGGERED": "Live chat widget opened by the user"
+            "WEBWIDGET_TRIGGERED": "Live chat widget opened by the user",
+            "LABEL_ADDED": "Label added to a contact or a conversation",
+            "LABEL_REMOVED": "Label removed from a contact or a conversation"
           }
         },
         "END_POINT": {

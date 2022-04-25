@@ -24,6 +24,20 @@ class BaseListener
     [contact, contact.account]
   end
 
+  def extract_label_and_account(event)
+    data = event.data[:data]
+    labels = event.data[:labels]
+    type = event.data[:type].downcase
+
+    payload = {
+      labels: labels,
+      data: data.webhook_data,
+      type: type
+    }
+
+    [payload, data.account]
+  end
+
   def extract_changed_attributes(event)
     changed_attributes = event.data[:changed_attributes]
 

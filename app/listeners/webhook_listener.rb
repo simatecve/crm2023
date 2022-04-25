@@ -51,10 +51,24 @@ class WebhookListener < BaseListener
     deliver_webhook_payloads(payload, inbox)
   end
 
+  def label_added(event)
+    data, account = extract_label_and_account(event)
+    payload = data.webhook_data.merge(event: __method__.to_s)
+
+    deliver_account_webhooks(payload, account)
+  end
+
+  def label_removed(event)
+    data, account = extract_label_and_account(event)
+    payload = data.merge(event: __method__.to_s)
+
+    deliver_account_webhooks(payload, account)
+  end
+
   private
 
-  def deliver_account_webhooks(payload, inbox)
-    inbox.account.webhooks.account.each do |webhook|
+  def deliver_account_webhooks(payload, account)
+    account.webhooks.account.each do |webhook|
       next unless webhook.subscriptions.include?(payload[:event])
 
       WebhookJob.perform_later(webhook.url, payload)
@@ -69,7 +83,7 @@ class WebhookListener < BaseListener
   end
 
   def deliver_webhook_payloads(payload, inbox)
-    deliver_account_webhooks(payload, inbox)
+    deliver_account_webhooks(payload, inbox.account)
     deliver_api_inbox_webhooks(payload, inbox)
   end
 end

@@ -39,6 +39,10 @@ module Events::Types
   CONTACT_MERGED = 'contact.merged'
   CONTACT_DELETED = 'contact.deleted'
 
+  # label events
+  LABEL_ADDED = 'label.added'
+  LABEL_REMOVED = 'label.removed'
+
   # notification events
   NOTIFICATION_CREATED = 'notification.created'
 

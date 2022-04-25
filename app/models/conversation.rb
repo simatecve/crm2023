@@ -177,6 +177,7 @@ class Conversation < ApplicationRecord
     notify_status_change
     create_activity
     notify_conversation_updation
+    notify_label_update
   end
 
   def ensure_snooze_until_reset

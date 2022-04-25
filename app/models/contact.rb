@@ -45,7 +45,7 @@ class Contact < ApplicationRecord
 
   before_validation :prepare_contact_attributes
   after_create_commit :dispatch_create_event, :ip_lookup
-  after_update_commit :dispatch_update_event
+  after_update_commit :dispatch_update_event, :notify_label_update
   after_destroy_commit :dispatch_destroy_event
 
   scope :order_on_last_activity_at, lambda { |direction|
