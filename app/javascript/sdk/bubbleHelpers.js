@@ -14,8 +14,8 @@ export const closeBubble = document.createElement('button');
 export const notificationBubble = document.createElement('span');
 
 export const setBubbleText = bubbleText => {
-  if (isExpandedView(window.$chatwoot.type)) {
-    const textNode = document.getElementById('woot-widget--expanded__text');
+  const textNode = document.getElementById('woot-widget--expanded__text');
+  if (isExpandedView(window.$chatwoot.type) && textNode) {
     textNode.innerHTML = bubbleText;
   }
 };

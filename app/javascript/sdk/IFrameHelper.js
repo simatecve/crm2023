@@ -32,6 +32,13 @@ import {
 } from 'shared/helpers/AudioNotificationHelper';
 import { isFlatWidgetStyle } from './settingsHelper';
 import { popoutChatWindow } from '../widget/helpers/popoutHelper';
+import {
+  SDK_INITIALIZE,
+  SDK_ON_CAPTURE_EVENT,
+  SDK_ON_LOCATION_CHANGE,
+  SDK_ON_WIDGET_OPEN,
+  SDK_SET_USER,
+} from '../shared/constants/sharedFrameEvents';
 
 export const IFrameHelper = {
   getUrl({ baseUrl, websiteToken }) {
@@ -139,7 +146,7 @@ export const IFrameHelper = {
         sameSite: 'Lax',
       });
       window.$chatwoot.hasLoaded = true;
-      IFrameHelper.sendMessage('config-set', {
+      IFrameHelper.sendMessage(SDK_INITIALIZE, {
         locale: window.$chatwoot.locale,
         position: window.$chatwoot.position,
         hideMessageBubble: window.$chatwoot.hideMessageBubble,
@@ -153,7 +160,7 @@ export const IFrameHelper = {
       IFrameHelper.toggleCloseButton();
 
       if (window.$chatwoot.user) {
-        IFrameHelper.sendMessage('set-user', window.$chatwoot.user);
+        IFrameHelper.sendMessage(SDK_SET_USER, window.$chatwoot.user);
       }
 
       window.playAudioAlert = () => {};
@@ -201,13 +208,13 @@ export const IFrameHelper = {
     },
 
     onBubbleToggle: isOpen => {
-      IFrameHelper.sendMessage('toggle-open', { isOpen });
+      IFrameHelper.sendMessage(SDK_ON_WIDGET_OPEN, { isOpen });
       if (isOpen) {
-        IFrameHelper.pushEvent('webwidget.triggered');
+        IFrameHelper.captureEvent('webwidget.triggered');
       }
     },
     onLocationChange: ({ referrerURL, referrerHost }) => {
-      IFrameHelper.sendMessage('change-url', {
+      IFrameHelper.sendMessage(SDK_ON_LOCATION_CHANGE, {
         referrerURL,
         referrerHost,
       });
@@ -248,8 +255,8 @@ export const IFrameHelper = {
       window.playAudioAlert();
     },
   },
-  pushEvent: eventName => {
-    IFrameHelper.sendMessage('push-event', { eventName });
+  captureEvent: eventName => {
+    IFrameHelper.sendMessage(SDK_ON_CAPTURE_EVENT, { eventName });
   },
 
   onLoad: ({ widgetColor }) => {

@@ -27,6 +27,7 @@ import configMixin from './mixins/configMixin';
 import availabilityMixin from 'widget/mixins/availability';
 import { getLocale } from './helpers/urlParamsHelper';
 import { isEmptyObject } from 'widget/helpers/utils';
+import frameListenerMixin from './mixins/frameListeners';
 import Spinner from 'shared/components/Spinner.vue';
 import routerMixin from './mixins/routerMixin';
 import {
@@ -39,14 +40,12 @@ import {
   ON_UNREAD_MESSAGE_CLICK,
 } from './constants/widgetBusEvents';
 
-import { SDK_SET_BUBBLE_VISIBILITY } from '../shared/constants/sharedFrameEvents';
-
 export default {
   name: 'App',
   components: {
     Spinner,
   },
-  mixins: [availabilityMixin, configMixin, routerMixin],
+  mixins: [availabilityMixin, configMixin, routerMixin, frameListenerMixin],
   data() {
     return {
       isMobile: false,
@@ -80,34 +79,10 @@ export default {
     },
   },
   mounted() {
-    const { websiteToken, locale, widgetColor } = window.chatwootWebChannel;
-    this.setLocale(locale);
-    this.setWidgetColor(widgetColor);
-    if (this.isIFrame) {
-      this.registerListeners();
-      this.sendLoadedEvent();
-      setHeader('X-Auth-Token', window.authToken);
-    } else {
-      setHeader('X-Auth-Token', window.authToken);
-      this.fetchOldConversations();
-      this.fetchAvailableAgents(websiteToken);
-      this.setLocale(getLocale(window.location.search));
-    }
-    if (this.isRNWebView) {
-      this.registerListeners();
-      this.sendRNWebViewLoadedEvent();
-    }
-    this.$store.dispatch('conversationAttributes/getAttributes');
-    this.registerUnreadEvents();
-    this.registerCampaignEvents();
+    this.initializeWidgetApp();
   },
   methods: {
-    ...mapActions('appConfig', [
-      'setAppConfig',
-      'setReferrerHost',
-      'setWidgetColor',
-      'setBubbleVisibility',
-    ]),
+    ...mapActions('appConfig', ['setWidgetColor']),
     ...mapActions('conversation', ['fetchOldConversations', 'setUserLastSeen']),
     ...mapActions('campaign', [
       'initCampaigns',
@@ -115,15 +90,29 @@ export default {
       'resetCampaign',
     ]),
     ...mapActions('agent', ['fetchAvailableAgents']),
-    scrollConversationToBottom() {
-      const container = this.$el.querySelector('.conversation-wrap');
-      container.scrollTop = container.scrollHeight;
-    },
-    setBubbleLabel() {
-      IFrameHelper.sendMessage({
-        event: 'setBubbleLabel',
-        label: this.$t('BUBBLE.LABEL'),
+    initializeWidgetApp() {
+      const { websiteToken, locale, widgetColor } = window.chatwootWebChannel;
+      setHeader('X-Auth-Token', window.authToken);
+
+      this.onSetLocale({ locale });
+      this.setWidgetColor(widgetColor);
+      this.registerListeners();
+      this.sendLoadedEvent();
+      this.fetchAvailableAgents(websiteToken);
+      this.fetchOldConversations().then(() => {
+        if (this.isIFrame) {
+          this.setUnreadView();
+        }
       });
+
+      if (!this.isIFrame) {
+        this.onSetLocale({ locale: getLocale(window.location.search) });
+      }
+
+      this.$store.dispatch('contacts/get');
+      this.$store.dispatch('conversationAttributes/getAttributes');
+      this.registerUnreadEvents();
+      this.registerCampaignEvents();
     },
     setIframeHeight(isFixedHeight) {
       this.$nextTick(() => {
@@ -134,12 +123,6 @@ export default {
           extraHeight,
         });
       });
-    },
-    setLocale(locale) {
-      const { enabledLanguages } = window.chatwootWebChannel;
-      if (enabledLanguages.some(lang => lang.iso_639_1_code === locale)) {
-        this.$root.$i18n.locale = locale;
-      }
     },
     registerUnreadEvents() {
       bus.$on(ON_AGENT_MESSAGE_RECEIVED, () => {
@@ -208,97 +191,20 @@ export default {
         });
       }
     },
-    createWidgetEvents(message) {
-      const { eventName } = message;
-      const isWidgetTriggerEvent = eventName === 'webwidget.triggered';
-      if (
-        isWidgetTriggerEvent &&
-        ['unread-messages', 'campaigns'].includes(this.$route.name)
-      ) {
+    registerListeners() {
+      if (!this.isIFrame && !this.isRNWebView) {
         return;
       }
-      this.$store.dispatch('events/create', { name: eventName });
-    },
-    registerListeners() {
-      const { websiteToken } = window.chatwootWebChannel;
-      window.addEventListener('message', e => {
-        if (!IFrameHelper.isAValidEvent(e)) {
-          return;
-        }
-        const message = IFrameHelper.getMessage(e);
-        if (message.event === 'config-set') {
-          this.setLocale(message.locale);
-          this.setBubbleLabel();
-          this.fetchOldConversations().then(() => this.setUnreadView());
-          this.fetchAvailableAgents(websiteToken);
-          this.setAppConfig(message);
-          this.$store.dispatch('contacts/get');
-        } else if (message.event === 'widget-visible') {
-          this.scrollConversationToBottom();
-        } else if (message.event === 'change-url') {
-          const { referrerURL, referrerHost } = message;
-          this.initCampaigns({
-            currentURL: referrerURL,
-            websiteToken,
-            isInBusinessHours: this.isInBusinessHours,
-          });
-          window.referrerURL = referrerURL;
-          this.setReferrerHost(referrerHost);
-        } else if (message.event === 'toggle-close-button') {
-          this.isMobile = message.isMobile;
-        } else if (message.event === 'push-event') {
-          this.createWidgetEvents(message);
-        } else if (message.event === 'set-label') {
-          this.$store.dispatch('conversationLabels/create', message.label);
-        } else if (message.event === 'remove-label') {
-          this.$store.dispatch('conversationLabels/destroy', message.label);
-        } else if (message.event === 'set-user') {
-          this.$store.dispatch('contacts/update', message);
-        } else if (message.event === 'set-custom-attributes') {
-          this.$store.dispatch(
-            'contacts/setCustomAttributes',
-            message.customAttributes
-          );
-        } else if (message.event === 'delete-custom-attribute') {
-          this.$store.dispatch(
-            'contacts/deleteCustomAttribute',
-            message.customAttribute
-          );
-        } else if (message.event === 'set-locale') {
-          this.setLocale(message.locale);
-          this.setBubbleLabel();
-        } else if (message.event === 'toggle-open') {
-          this.$store.dispatch('appConfig/toggleWidgetOpen', message.isOpen);
 
-          const shouldShowMessageView =
-            ['home'].includes(this.$route.name) &&
-            message.isOpen &&
-            this.messageCount;
-          const shouldShowHomeView =
-            !message.isOpen &&
-            ['unread-messages', 'campaigns'].includes(this.$route.name);
-
-          if (shouldShowMessageView) {
-            this.replaceRoute('messages');
-          }
-          if (shouldShowHomeView) {
-            this.$store.dispatch('conversation/setUserLastSeen');
-            this.unsetUnreadView();
-            this.replaceRoute('home');
-          }
-          if (!message.isOpen) {
-            this.resetCampaign();
-          }
-        } else if (message.event === SDK_SET_BUBBLE_VISIBILITY) {
-          this.setBubbleVisibility(message.hideMessageBubble);
-        }
-      });
+      window.addEventListener('message', this.onIFramePostMessage);
     },
     sendLoadedEvent() {
-      IFrameHelper.sendMessage(loadedEventConfig());
-    },
-    sendRNWebViewLoadedEvent() {
-      RNHelper.sendMessage(loadedEventConfig());
+      if (this.isIFrame) {
+        IFrameHelper.sendMessage(loadedEventConfig());
+      }
+      if (this.isRNWebView) {
+        RNHelper.sendMessage(loadedEventConfig());
+      }
     },
   },
 };
