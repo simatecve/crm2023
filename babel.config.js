@@ -1,14 +1,5 @@
 /* eslint-disable global-require */
-const plugins = () => [
-  require('babel-plugin-macros'),
-  [
-    require('@babel/plugin-proposal-class-properties').default,
-    {
-      loose: true,
-    },
-  ],
-  [require('babel-plugin-transform-vue-jsx')],
-];
+const plugins = () => ['transform-vue-jsx'];
 
 module.exports = api => {
   const validEnv = ['development', 'test', 'production'];

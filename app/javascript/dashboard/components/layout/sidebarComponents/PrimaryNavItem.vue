@@ -45,11 +45,12 @@ export default {
 }
 
 .menu-item {
-  display: inline-flex;
-  position: relative;
   border-radius: var(--border-radius-large);
   border: 1px solid transparent;
   color: var(--s-600);
+  display: inline-flex;
+  height: auto;
+  position: relative;
 
   &:hover {
     background: var(--w-25);

@@ -40,8 +40,6 @@ import {
 import FluentIcon from 'shared/components/FluentIcon/DashboardIcon';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
 
-Vue.config.env = process.env;
-
 if (window.errorLoggingConfig) {
   Sentry.init({
     Vue,

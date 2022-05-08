@@ -1,9 +1,10 @@
 const path = require('path');
-const resolve = require('../config/webpack/resolve');
 
-// Chatwoot's webpack.config.js
+const resolve = require('../config/webpack/resolve'); // Chatwoot's webpack.config.js
+
 process.env.NODE_ENV = 'development';
-const custom = require('../config/webpack/environment');
+
+const custom = require('../config/webpack/webpack.config');
 
 module.exports = {
   stories: [
@@ -29,16 +30,18 @@ module.exports = {
       ...config,
       resolve: {
         ...config.resolve,
-        modules: custom.resolvedModules.map(i => i.value),
+        ...resolve,
+        // modules: custom.resolvedModules.map(i => i.value),
       },
     };
-
     newConfig.module.rules.push({
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader'],
       include: path.resolve(__dirname, '../app/javascript'),
     });
-
     return newConfig;
+  },
+  core: {
+    builder: 'webpack5',
   },
 };
