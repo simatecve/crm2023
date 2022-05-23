@@ -3,7 +3,8 @@
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
 version: 2
-defaults: &defaults
+defaults:
+  &defaults
   working_directory: ~/build
   docker:
     # specify the version you desire here
@@ -15,8 +16,8 @@ defaults: &defaults
     - image: cimg/postgres:14.1
     - image: cimg/redis:6.2.6
   environment:
-      - CC_TEST_REPORTER_ID: b1b5c4447bf93f6f0b06a64756e35afd0810ea83649f03971cbf303b4449456f
-      - RAILS_LOG_TO_STDOUT: false
+    - CC_TEST_REPORTER_ID: b1b5c4447bf93f6f0b06a64756e35afd0810ea83649f03971cbf303b4449456f
+    - RAILS_LOG_TO_STDOUT: false
 jobs:
   build:
     <<: *defaults
@@ -37,23 +38,24 @@ jobs:
       # Run bundler
       # Load installed gems from cache if possible, bundle install then save cache
       # Multiple caches are used to increase the chance of a cache hit
-
       - restore_cache:
           keys:
-            - chatwoot-bundle-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+            - chatwoot-bundle-{{ .Environment.CACHE_VERSION }}-{{ checksum
+              "Gemfile.lock" }}
             - chatwoot-bundle
 
       - run: bundle install --frozen --path ~/.bundle
       - save_cache:
           paths:
             - ~/.bundle
-          key: chatwoot-bundle-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
-
+          key: chatwoot-bundle-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock"
+            }}
 
       # Only necessary if app uses webpacker or yarn in some other way
       - restore_cache:
           keys:
-            - chatwoot-yarn-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+            - chatwoot-yarn-{{ .Environment.CACHE_VERSION }}-{{ checksum
+              "yarn.lock" }}
             - chatwoot-yarn-
 
       - run:
@@ -67,7 +69,7 @@ jobs:
             - ~/.cache/yarn
 
       - run:
-          name:  Download cc-test-reporter
+          name: Download cc-test-reporter
           command: |
             mkdir -p ~/tmp
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ~/tmp/cc-test-reporter
@@ -141,3 +143,5 @@ jobs:
           command: |
             ~/tmp/cc-test-reporter sum-coverage ~/tmp/codeclimate.*.json -p 2 -o ~/tmp/codeclimate.total.json
             ~/tmp/cc-test-reporter upload-coverage -i ~/tmp/codeclimate.total.json
+    # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
+    resource_class: large
