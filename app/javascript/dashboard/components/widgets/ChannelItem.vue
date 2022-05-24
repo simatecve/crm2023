@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="isActive"
     class="small-6 medium-4 large-3 columns channel"
     :class="{ inactive: !isActive }"
     @click="onItemClick"
