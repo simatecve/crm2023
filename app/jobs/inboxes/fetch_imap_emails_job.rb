@@ -41,5 +41,6 @@ class Inboxes::FetchImapEmailsJob < ApplicationJob
     end
 
     channel.update(imap_inbox_synced_at: Time.now.utc) if new_mails
+    channel.reauthorized!
   end
 end
