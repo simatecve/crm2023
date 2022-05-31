@@ -10,7 +10,7 @@ class Inboxes::FetchImapEmailsJob < ApplicationJob
   rescue Errno::ECONNREFUSED, Net::OpenTimeout, Net::IMAP::NoResponseError
     channel.authorization_error!
   rescue StandardError => e
-    channel.authorization_error!
+    # channel.authorization_error!
     Sentry.capture_exception(e)
   end
 
@@ -34,10 +34,14 @@ class Inboxes::FetchImapEmailsJob < ApplicationJob
     new_mails = false
 
     Mail.find(what: :last, count: 10, order: :desc).each do |inbound_mail|
-      if inbound_mail.date.utc >= channel.imap_inbox_synced_at
+      next unless inbound_mail.date.utc >= channel.imap_inbox_synced_at
+
+      begin
         Imap::ImapMailbox.new.process(inbound_mail, channel)
-        new_mails = true
+      rescue StandardError => e
+        Sentry.capture_exception(e)
       end
+      new_mails = true
     end
 
     channel.update(imap_inbox_synced_at: Time.now.utc) if new_mails
