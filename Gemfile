@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '3.0.2'
+ruby '3.0.4'
 
 ##-- base gems for rails --##
 gem 'rack-cors', require: 'rack/cors'
@@ -97,9 +97,9 @@ gem 'brakeman'
 gem 'ddtrace'
 gem 'newrelic_rpm'
 gem 'scout_apm'
-gem 'sentry-rails'
-gem 'sentry-ruby'
-gem 'sentry-sidekiq'
+gem 'sentry-rails', '~> 5.3'
+gem 'sentry-ruby', '~> 5.3'
+gem 'sentry-sidekiq', '~> 5.3'
 
 ##-- background job processing --##
 gem 'sidekiq', '~> 6.4.0'
