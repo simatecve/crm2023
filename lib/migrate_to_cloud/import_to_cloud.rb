@@ -125,7 +125,7 @@ class MigrateToCloud::ImportToCloud
           conversation.add_labels([data[tags['tag_id']]])
         end
       elsif tags['taggable_type'] == 'Contact'
-        contact = account.contacts.find(conversation_map[tags['taggable_id']])
+        contact = account.contacts.find(contact_map[tags['taggable_id']])
         contact.add_labels([data[tags['tag_id']]])
       end
     end
