@@ -8,6 +8,8 @@ class MigrateToCloud::ImportToCloud
       import_users_to_account
     when 'contact'
       import_contacts_to_account
+    when 'label'
+      import_labels_to_account
     when 'conversation'
       import_conversations_to_account
     when 'message'
@@ -79,6 +81,24 @@ class MigrateToCloud::ImportToCloud
       iterator += 1
     end
     account.contacts.insert_all(data)
+  end
+
+  def import_labels_to_account
+    filename = 'export/labels.csv'
+    data = []
+    CSV.foreach(filename, headers: true) do |row|
+      label = row.to_hash
+      new_label = {}
+      new_label['title'] = label['title']
+      new_label['description'] = label['description']
+      new_label['color'] = label['color']
+      new_label['show_on_sidebar'] = label['show_on_sidebar']
+      new_label['created_at'] = label['created_at']
+      new_label['updated_at'] = label['updated_at']
+      data.push(new_label)
+    end
+    log_to_console('INSERT_LABEL', "")
+    account.labels.insert_all(data)
   end
 
   def import_conversations_to_account
