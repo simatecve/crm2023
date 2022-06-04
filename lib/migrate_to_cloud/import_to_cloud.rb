@@ -4,8 +4,8 @@ class MigrateToCloud::ImportToCloud
   def perform(type)
     case type
     when 'user'
-      prepare_user_map
-      # import_users_to_account
+      # prepare_user_map
+      import_users_to_account
     when 'contact'
       import_contacts_to_account
     when 'conversation'
