@@ -1,5 +1,5 @@
 class MigrateToCloud::ImportToCloud
-  pattr_initialize [:account_id!, :inbox_id]
+  pattr_initialize [:account_id!, :inbox_id, :password]
 
   def perform(type)
     case type
@@ -33,7 +33,7 @@ class MigrateToCloud::ImportToCloud
       new_user['display_name'] = user['display_name']
       new_user['email'] = user['email']
       new_user['name'] = user['name']
-      new_user['password'] = 'Okani2022#'
+      new_user['password'] = password
       new_user['updated_at'] = user['updated_at']
       new_user['confirmed_at'] = Time.now
       new_user['custom_attributes'] = append_migrated_id(new_user['custom_attributes'], user['id'])
@@ -210,10 +210,10 @@ class MigrateToCloud::ImportToCloud
     contact_map = {}
     account.contacts.find_in_batches do |contact_batch|
       contact_batch.each do |contact|
-        contact_map[contact.additional_attributes["migrated_id"]] = contact.id
+        contact_map[contact.additional_attributes['migrated_id']] = contact.id
       end
     end
-    log_to_console('PREPARE_CONTACT_MAP', "")
+    log_to_console('PREPARE_CONTACT_MAP', '')
     contact_map
   end
 
@@ -221,7 +221,7 @@ class MigrateToCloud::ImportToCloud
     user_map = {}
     account.users.find_in_batches do |user_batch|
       user_batch.each do |user|
-        user_map[user.custom_attributes["migrated_id"]] = user.id
+        user_map[user.custom_attributes['migrated_id']] = user.id
       end
     end
     log_to_console('PREPARE_USER_MAP', user_map)
@@ -232,7 +232,7 @@ class MigrateToCloud::ImportToCloud
     conversation_map = {}
     account.conversations.find_in_batches do |conversation_batch|
       conversation_batch.each do |conversation|
-        conversation_map[conversation.additional_attributes["migrated_id"]] = conversation.id
+        conversation_map[conversation.additional_attributes['migrated_id']] = conversation.id
       end
     end
     log_to_console('PREPARE_CONVERSATION_MAP', '')
