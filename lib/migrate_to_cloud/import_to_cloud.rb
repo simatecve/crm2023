@@ -97,8 +97,36 @@ class MigrateToCloud::ImportToCloud
       new_label['updated_at'] = label['updated_at']
       data.push(new_label)
     end
-    log_to_console('INSERT_LABEL', "")
+    log_to_console('INSERT_LABEL', '')
     account.labels.insert_all(data)
+  end
+
+  def import_tags_to_account
+    filename = 'export/tags.csv'
+    data = {}
+    CSV.foreach(filename, headers: true) do |row|
+      label = row.to_hash
+      data[label['id']] = label['name']
+    end
+
+    contact_map = prepare_contact_map
+    conversation_map = prepare_conversation_map
+
+    filename = 'export/taggings.csv'
+    CSV.foreach(filename, headers: true) do |row|
+      tags = row.to_hash
+      model = nil
+
+      if tags['taggable_type'] == 'Conversation'
+        if conversation_map[tags['taggable_id']]
+          conversation = account.conversations.find(conversation_map[tags['taggable_id']])
+          conversation.add_labels([data[tags['tag_id']]])
+        end
+      elsif tags['taggable_type'] == 'Contact'
+        contact = account.contacts.find(conversation_map[tags['taggable_id']])
+        contact.add_labels([data[tags['tag_id']]])
+      end
+    end
   end
 
   def import_conversations_to_account
