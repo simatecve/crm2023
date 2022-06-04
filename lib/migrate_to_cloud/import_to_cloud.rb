@@ -14,6 +14,8 @@ class MigrateToCloud::ImportToCloud
       import_conversations_to_account
     when 'message'
       import_messages_to_account
+    when 'tag'
+      import_tags_to_account
     when 'all'
       import_users_to_account
       import_contacts_to_account
