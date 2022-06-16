@@ -134,6 +134,10 @@ class Contact < ApplicationRecord
     ).or(Current.account.contacts.where.not(identifier: [nil, '']))
   end
 
+  def resolved?
+    identifier.present? || email.present? || phone_number.present?
+  end
+
   private
 
   def ip_lookup

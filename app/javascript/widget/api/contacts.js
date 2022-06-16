@@ -12,6 +12,12 @@ export default {
       ...userObject,
     });
   },
+  setUser(identifier, userObject) {
+    return API.patch(buildUrl('widget/contact/set_user'), {
+      identifier,
+      ...userObject,
+    });
+  },
   setCustomAttributes(customAttributes = {}) {
     return API.patch(buildUrl('widget/contact'), {
       custom_attributes: customAttributes,

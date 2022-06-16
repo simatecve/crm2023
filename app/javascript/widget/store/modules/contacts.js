@@ -1,3 +1,4 @@
+import { setHeader } from 'widget/helpers/axios';
 import { IFrameHelper } from 'widget/helpers/utils';
 import ContactsAPI from '../../api/contacts';
 import { SET_USER_ERROR } from '../../constants/errorTypes';
@@ -56,6 +57,63 @@ export const actions = {
 
       dispatch('get');
       if (identifier_hash) {
+        dispatch('conversation/clearConversations', {}, { root: true });
+        dispatch('conversation/fetchOldConversations', {}, { root: true });
+        dispatch('conversationAttributes/getAttributes', {}, { root: true });
+      }
+    } catch (error) {
+      const data =
+        error && error.response && error.response.data
+          ? error.response.data
+          : error;
+      IFrameHelper.sendMessage({
+        event: 'error',
+        errorType: SET_USER_ERROR,
+        data,
+      });
+    }
+  },
+  setUser: async ({ dispatch }, { identifier, user: userObject }) => {
+    try {
+      const {
+        email,
+        name,
+        avatar_url,
+        identifier_hash,
+        phone_number,
+        company_name,
+        city,
+        country_code,
+        description,
+        custom_attributes,
+        social_profiles,
+      } = userObject;
+      const user = {
+        email,
+        name,
+        avatar_url,
+        identifier_hash,
+        phone_number,
+        additional_attributes: {
+          company_name,
+          city,
+          description,
+          country_code,
+          social_profiles,
+        },
+        custom_attributes,
+      };
+      const response = await ContactsAPI.setUser(identifier, user);
+      const { data = {} } = response;
+      dispatch('get');
+      if (data.widget_auth_token) {
+        setHeader('X-Auth-Token', data.widget_auth_token);
+        IFrameHelper.sendMessage({
+          event: 'setAuthCookie',
+          data: { authToken: data.widget_auth_token },
+        });
+      }
+      if (identifier_hash || data.widget_auth_token) {
         dispatch('conversation/clearConversations', {}, { root: true });
         dispatch('conversation/fetchOldConversations', {}, { root: true });
         dispatch('conversationAttributes/getAttributes', {}, { root: true });
