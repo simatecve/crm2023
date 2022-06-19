@@ -3,6 +3,7 @@ import { IFrameHelper } from '../sdk/IFrameHelper';
 import {
   getBubbleView,
   getDarkMode,
+  getLoadingType,
   getWidgetStyle,
 } from '../sdk/settingsHelper';
 import {
@@ -12,7 +13,24 @@ import {
 } from '../sdk/cookieHelpers';
 import { addClass, removeClass } from '../sdk/DOMHelpers';
 import { SDK_SET_BUBBLE_VISIBILITY } from 'shared/constants/sharedFrameEvents';
-const runSDK = ({ baseUrl, websiteToken }) => {
+import { LOADING_TYPE } from '../sdk/constants';
+
+const isDocumentLoadComplete = () => document.readyState === 'complete';
+
+const runSDK = () => {
+  const { baseUrl, websiteToken } = window.$chatwoot;
+  IFrameHelper.createFrame({ baseUrl, websiteToken });
+};
+
+const initializeLoadEventListener = () => {
+  document.onreadystatechange = () => {
+    if (isDocumentLoadComplete()) {
+      runSDK();
+    }
+  };
+};
+
+export const initializeSDK = ({ baseUrl, websiteToken }) => {
   if (window.$chatwoot) {
     return;
   }
@@ -20,18 +38,19 @@ const runSDK = ({ baseUrl, websiteToken }) => {
   const chatwootSettings = window.chatwootSettings || {};
   window.$chatwoot = {
     baseUrl,
+    darkMode: getDarkMode(chatwootSettings.darkMode),
     hasLoaded: false,
     hideMessageBubble: chatwootSettings.hideMessageBubble || false,
     isOpen: false,
-    position: chatwootSettings.position === 'left' ? 'left' : 'right',
-    websiteToken,
-    locale: chatwootSettings.locale,
-    type: getBubbleView(chatwootSettings.type),
     launcherTitle: chatwootSettings.launcherTitle || '',
-    showPopoutButton: chatwootSettings.showPopoutButton || false,
-    widgetStyle: getWidgetStyle(chatwootSettings.widgetStyle) || 'standard',
+    loadingType: getLoadingType(chatwootSettings.loadingType),
+    locale: chatwootSettings.locale,
+    position: chatwootSettings.position === 'left' ? 'left' : 'right',
     resetTriggered: false,
-    darkMode: getDarkMode(chatwootSettings.darkMode),
+    showPopoutButton: chatwootSettings.showPopoutButton || false,
+    type: getBubbleView(chatwootSettings.type),
+    websiteToken,
+    widgetStyle: getWidgetStyle(chatwootSettings.widgetStyle) || 'standard',
 
     toggle(state) {
       IFrameHelper.events.toggleBubble(state);
@@ -136,13 +155,16 @@ const runSDK = ({ baseUrl, websiteToken }) => {
       window.$chatwoot.resetTriggered = true;
     },
   };
-
-  IFrameHelper.createFrame({
-    baseUrl,
-    websiteToken,
-  });
+  if (
+    window.$chatwoot.loadingType === LOADING_TYPE[0] ||
+    isDocumentLoadComplete()
+  ) {
+    runSDK();
+  } else {
+    initializeLoadEventListener();
+  }
 };
 
 window.chatwootSDK = {
-  run: runSDK,
+  run: initializeSDK,
 };

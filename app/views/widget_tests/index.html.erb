@@ -8,18 +8,18 @@
     @web_widget.hmac_token,
     user_id.to_s
   )
-
 %>
 <script>
 
 window.chatwootSettings = {
-  hideMessageBubble: false,
-  position: '<%= @widget_position %>',
-  locale: 'en',
-  type: '<%= @widget_type %>',
-  showPopoutButton: true,
-  widgetStyle: '<%= @widget_style %>',
   darkMode: '<%= @dark_mode %>',
+  hideMessageBubble: false,
+  loadingType: '<%= @loading_type %>',
+  locale: 'en',
+  position: '<%= @widget_position %>',
+  showPopoutButton: true,
+  type: '<%= @widget_type %>',
+  widgetStyle: '<%= @widget_style %>',
 };
 
 (function(d,t) {
