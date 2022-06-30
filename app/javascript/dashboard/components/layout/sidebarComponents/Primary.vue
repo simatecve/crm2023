@@ -16,6 +16,14 @@
       />
     </nav>
     <div class="menu vertical user-menu">
+      <woot-button
+        v-tooltip.right="commandBarTooltip"
+        variant="clear"
+        color-scheme="secondary"
+        :class="{ 'is-active': isControlCenterOpen }"
+        icon="flashlight"
+        @click="openControlCenter"
+      />
       <notification-bell @open-notification-panel="openNotificationPanel" />
       <agent-details @toggle-menu="toggleOptions" />
       <options-menu
@@ -70,7 +78,17 @@ export default {
   data() {
     return {
       showOptionsMenu: false,
+      isControlCenterOpen: false,
     };
+  },
+  computed: {
+    commandBarTooltip() {
+      const isMacKeyboard =
+        navigator.userAgentData.platform.indexOf('Mac') > -1;
+      return isMacKeyboard
+        ? this.$t('COMMAND_BAR.TOOLTIP_NOT_MAC')
+        : this.$t('COMMAND_BAR.TOOLTIP_MAC');
+    },
   },
   methods: {
     frontendURL,
@@ -85,6 +103,10 @@ export default {
     },
     openNotificationPanel() {
       this.$emit('open-notification-panel');
+    },
+    openControlCenter() {
+      const ninja = document.querySelector('ninja-keys');
+      ninja.open();
     },
   },
 };

@@ -4,7 +4,7 @@
     ref="ninjakeys"
     :no-auto-load-md-icons="true"
     hideBreadcrumbs
-    :placeholder="placeholder"
+    :placeholder="commandBarTooltip"
     @selected="setCommandbarData"
   />
 </template>
@@ -28,11 +28,6 @@ export default {
     goToCommandHotKeys,
   ],
 
-  data() {
-    return {
-      placeholder: this.$t('COMMAND_BAR.SEARCH_PLACEHOLDER'),
-    };
-  },
   computed: {
     accountId() {
       return this.$store.getters.getCurrentAccountId;
@@ -42,6 +37,13 @@ export default {
     },
     hotKeys() {
       return [...this.conversationHotKeys, ...this.goToCommandHotKeys];
+    },
+    commandBarTooltip() {
+      const isMacKeyboard =
+        navigator.userAgentData.platform.indexOf('Mac') > -1;
+      return isMacKeyboard
+        ? this.$t('COMMAND_BAR.SEARCH_PLACEHOLDER_MAC')
+        : this.$t('COMMAND_BAR.SEARCH_PLACEHOLDER');
     },
   },
   watch: {

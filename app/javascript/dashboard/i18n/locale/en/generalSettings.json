@@ -48,7 +48,7 @@
       }
     },
     "UPDATE_CHATWOOT": "An update %{latestChatwootVersion} for Chatwoot is available. Please update your instance.",
-    "LEARN_MORE":"Learn more"
+    "LEARN_MORE": "Learn more"
   },
   "FORMS": {
     "MULTISELECT": {
@@ -93,7 +93,10 @@
     }
   },
   "COMMAND_BAR": {
-    "SEARCH_PLACEHOLDER": "Search or jump to",
+    "SEARCH_PLACEHOLDER": "Search or jump to (ctrl + k)",
+    "SEARCH_PLACEHOLDER_MAC": "Search or jump to (cmd + k)",
+    "TOOLTIP_MAC": "Command bar (cmd + k)",
+    "TOOLTIP_NOT_MAC": "Command bar (ctrl + k)",
     "SECTIONS": {
       "GENERAL": "General",
       "REPORTS": "Reports",
