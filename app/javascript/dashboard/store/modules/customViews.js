@@ -1,6 +1,7 @@
 import * as MutationHelpers from 'shared/helpers/vuex/mutationHelpers';
 import types from '../mutation-types';
 import CustomViewsAPI from '../../api/customViews';
+import dbStorage from '../../helper/dbStorage';
 
 export const state = {
   records: [],
@@ -31,10 +32,20 @@ export const actions = {
         filterType
       );
       commit(types.SET_CUSTOM_VIEW, response.data);
+      await dbStorage.setItem('customViews', response.data);
     } catch (error) {
       // Ignore error
     } finally {
       commit(types.SET_CUSTOM_VIEW_UI_FLAG, { isFetching: false });
+    }
+  },
+
+  setCustomViews: async ({ commit }) => {
+    try {
+      const customViews = await dbStorage.getItem('customViews');
+      commit(types.SET_CUSTOM_VIEW, customViews || []);
+    } catch (err) {
+      // Ignore retrieving errors
     }
   },
   create: async function createCustomViews({ commit }, obj) {

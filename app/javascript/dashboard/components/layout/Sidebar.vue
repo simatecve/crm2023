@@ -120,12 +120,12 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch('labels/get');
-    this.$store.dispatch('inboxes/get');
+    // this.$store.dispatch('labels/get');
+    // this.$store.dispatch('inboxes/get');
     this.$store.dispatch('notifications/unReadCount');
-    this.$store.dispatch('teams/get');
+    // this.$store.dispatch('teams/get');
     this.$store.dispatch('attributes/get');
-    this.fetchCustomViews();
+    // this.fetchCustomViews();
   },
 
   methods: {

@@ -6,6 +6,7 @@ import WebChannel from '../../api/channel/webChannel';
 import FBChannel from '../../api/channel/fbChannel';
 import TwilioChannel from '../../api/channel/twilioChannel';
 import { parseAPIErrorResponse } from '../utils/api';
+import dbStorage from '../../helper/dbStorage';
 
 const buildInboxData = inboxParams => {
   const formData = new FormData();
@@ -50,6 +51,7 @@ const throwErrorMessage = error => {
 
 export const getters = {
   getInboxes($state) {
+    console.log($state.records);
     return $state.records;
   },
   getWhatsAppTemplates: $state => inboxId => {
@@ -129,8 +131,18 @@ export const actions = {
       const response = await InboxesAPI.get();
       commit(types.default.SET_INBOXES_UI_FLAG, { isFetching: false });
       commit(types.default.SET_INBOXES, response.data.payload);
+      await dbStorage.setItem('inboxes', response.data.payload);
     } catch (error) {
       commit(types.default.SET_INBOXES_UI_FLAG, { isFetching: false });
+    }
+  },
+  async setInboxes({ commit }) {
+    try {
+      const inboxes = await dbStorage.getItem('inboxes');
+      console.log(inboxes);
+      commit(types.default.SET_INBOXES, inboxes || []);
+    } catch (err) {
+      // Ignore retrieving errors
     }
   },
   createChannel: async ({ commit }, params) => {

@@ -79,6 +79,11 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch('inboxes/setInboxes');
+    this.$store.dispatch('labels/setLabels');
+    this.$store.dispatch('customViews/setCustomViews');
+    this.$store.dispatch('teams/setTeams');
+    this.$store.dispatch('setConversationList');
     this.setLocale(window.chatwootConfig.selectedLocale);
   },
   methods: {

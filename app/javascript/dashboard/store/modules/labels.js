@@ -1,6 +1,7 @@
 import * as MutationHelpers from 'shared/helpers/vuex/mutationHelpers';
 import types from '../mutation-types';
 import LabelsAPI from '../../api/labels';
+import dbStorage from '../../helper/dbStorage';
 
 export const state = {
   records: [],
@@ -32,10 +33,20 @@ export const actions = {
     try {
       const response = await LabelsAPI.get();
       commit(types.SET_LABELS, response.data.payload);
+      await dbStorage.setItem('labels', response.data.payload);
     } catch (error) {
       // Ignore error
     } finally {
       commit(types.SET_LABEL_UI_FLAG, { isFetching: false });
+    }
+  },
+
+  async setLabels({ commit }) {
+    try {
+      const labels = await dbStorage.getItem('labels');
+      commit(types.default.SET_LABELS, labels || []);
+    } catch (err) {
+      // Ignore retrieving errors
     }
   },
 

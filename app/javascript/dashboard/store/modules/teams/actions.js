@@ -7,6 +7,7 @@ import {
   DELETE_TEAM,
 } from './types';
 import TeamsAPI from '../../../api/teams';
+import dbStorage from '../../../helper/dbStorage';
 
 export const actions = {
   create: async ({ commit }, teamInfo) => {
@@ -28,13 +29,21 @@ export const actions = {
       const { data } = await TeamsAPI.get();
       commit(CLEAR_TEAMS);
       commit(SET_TEAMS, data);
+      await dbStorage.setItem('teams', data || {});
     } catch (error) {
       throw new Error(error);
     } finally {
       commit(SET_TEAM_UI_FLAG, { isFetching: false });
     }
   },
-
+  setTeams: async ({ commit }) => {
+    try {
+      const teams = await dbStorage.getItem('teams');
+      commit(SET_TEAMS, teams || {});
+    } catch (err) {
+      // Ignore retrieving errors
+    }
+  },
   show: async ({ commit }, { id }) => {
     commit(SET_TEAM_UI_FLAG, { isFetchingItem: true });
     try {

@@ -1,3 +1,4 @@
+import dbStorage from '../../../../helper/dbStorage';
 import types from '../../../mutation-types';
 
 export const setPageFilter = ({ dispatch, filter, page, markEndReached }) => {
@@ -22,7 +23,7 @@ export const isOnMentionsView = ({ route: { name: routeName } }) => {
   return MENTION_ROUTES.includes(routeName);
 };
 
-export const buildConversationList = (
+export const buildConversationList = async (
   context,
   requestPayload,
   responseData,
@@ -43,4 +44,5 @@ export const buildConversationList = (
     page: requestPayload.page,
     markEndReached: !conversationList.length,
   });
+  await dbStorage.setItem('conversations', conversationList || []);
 };

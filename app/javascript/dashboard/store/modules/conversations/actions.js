@@ -8,6 +8,7 @@ import {
   buildConversationList,
   isOnMentionsView,
 } from './helpers/actionHelpers';
+import dbStorage from '../../../helper/dbStorage';
 
 // actions
 const actions = {
@@ -35,6 +36,14 @@ const actions = {
       );
     } catch (error) {
       // Handle error
+    }
+  },
+  async setConversationList({ commit }) {
+    try {
+      const conversations = await dbStorage.getItem('conversations');
+      commit(types.SET_ALL_CONVERSATION, conversations);
+    } catch (error) {
+      // Ignore Error
     }
   },
 
