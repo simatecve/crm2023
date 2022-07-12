@@ -28,7 +28,6 @@ export default {
         FORBID_ATTR: [
           'id',
           'class',
-          'style',
           'bgcolor',
           'valign',
           'width',
