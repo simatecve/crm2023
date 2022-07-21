@@ -99,7 +99,7 @@ export default {
   watch: {
     'currentChat.inbox_id'(inboxId) {
       if (inboxId) {
-        this.$store.dispatch('inboxAssignableAgents/fetch', { inboxId });
+        this.$store.dispatch('inboxAssignableAgents/fetch', [inboxId]);
       }
     },
     'currentChat.id'() {
@@ -141,6 +141,7 @@ export default {
 .dashboard-app--tabs {
   background: var(--white);
   margin-top: -1px;
+  min-height: var(--dashboard-app-tabs-height);
 }
 
 .messages-and-sidebar {

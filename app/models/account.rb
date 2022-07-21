@@ -4,6 +4,7 @@
 #
 #  id                    :integer          not null, primary key
 #  auto_resolve_duration :integer
+#  custom_attributes     :jsonb
 #  domain                :string(100)
 #  feature_flags         :integer          default(0), not null
 #  limits                :jsonb
@@ -20,7 +21,6 @@ class Account < ApplicationRecord
   include FlagShihTzu
   include Reportable
   include Featurable
-  prepend_mod_with('Account')
 
   DEFAULT_QUERY_SETTING = {
     flag_query_mode: :bit_operator,
@@ -40,7 +40,8 @@ class Account < ApplicationRecord
   has_many :agent_bots, dependent: :destroy_async
   has_many :api_channels, dependent: :destroy_async, class_name: '::Channel::Api'
   has_many :articles, dependent: :destroy_async, class_name: '::Article'
-  has_many :automation_rules, dependent: :destroy
+  has_many :automation_rules, dependent: :destroy_async
+  has_many :macros, dependent: :destroy_async
   has_many :campaigns, dependent: :destroy_async
   has_many :canned_responses, dependent: :destroy_async
   has_many :categories, dependent: :destroy_async, class_name: '::Category'
@@ -113,7 +114,7 @@ class Account < ApplicationRecord
   end
 
   def support_email
-    super || ENV['MAILER_SENDER_EMAIL'] || GlobalConfig.get('MAILER_SUPPORT_EMAIL')['MAILER_SUPPORT_EMAIL']
+    super || ENV.fetch('MAILER_SENDER_EMAIL') { GlobalConfig.get('MAILER_SUPPORT_EMAIL')['MAILER_SUPPORT_EMAIL'] }
   end
 
   def usage_limits
@@ -146,3 +147,5 @@ class Account < ApplicationRecord
     ActiveRecord::Base.connection.exec_query("drop sequence IF EXISTS conv_dpid_seq_#{id}")
   end
 end
+
+Account.prepend_mod_with('Account')
