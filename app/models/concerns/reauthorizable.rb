@@ -13,7 +13,7 @@
 module Reauthorizable
   extend ActiveSupport::Concern
 
-  AUTHORIZATION_ERROR_THRESHOLD = 15
+  AUTHORIZATION_ERROR_THRESHOLD = 150
 
   # model attribute
   def reauthorization_required?
