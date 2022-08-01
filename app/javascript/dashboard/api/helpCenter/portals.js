@@ -11,6 +11,10 @@ class PortalsAPI extends ApiClient {
       `${this.url}/${portalSlug}/articles?page=${pageNumber}&locale=${locale}`
     );
   }
+
+  getArticle({ id, portalSlug }) {
+    return axios.get(`${this.url}/${portalSlug}/articles/${id}`);
+  }
 }
 
 export default new PortalsAPI();

@@ -11,7 +11,7 @@
 
 <script>
 import EditArticleHeader from 'dashboard/routes/dashboard/helpcenter/components/Header/EditArticleHeader';
-import EditArticleField from 'dashboard/components/helpCenter/EditArticle';
+import EditArticleField from '../../components/ArticleEditor.vue';
 export default {
   components: {
     EditArticleHeader,

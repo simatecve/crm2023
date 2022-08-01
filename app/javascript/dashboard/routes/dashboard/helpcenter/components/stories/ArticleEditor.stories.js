@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import EditArticle from './EditArticle.vue';
+import EditArticle from '../ArticleEditor.vue';
 
 export default {
   title: 'Components/Help Center',

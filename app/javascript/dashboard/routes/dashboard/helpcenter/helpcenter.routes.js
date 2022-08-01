@@ -16,7 +16,7 @@ const ListCategoryArticles = () =>
 const ListAllArticles = () => import('./pages/articles/ListAllArticles');
 
 const NewArticle = () => import('./pages/articles/NewArticle');
-const EditArticle = () => import('./pages/articles/EditArticle');
+const ShowArticle = () => import('./pages/articles/ShowArticle');
 
 const portalRoutes = [
   {
@@ -80,9 +80,9 @@ const articleRoutes = [
 
   {
     path: getPortalRoute(':portalSlug/:locale/articles/:articleSlug'),
-    name: 'edit_article',
+    name: 'show_article',
     roles: ['administrator', 'agent'],
-    component: EditArticle,
+    component: ShowArticle,
   },
 ];
 
