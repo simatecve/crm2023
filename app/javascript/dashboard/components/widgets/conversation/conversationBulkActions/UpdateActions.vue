@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mixin as clickaway } from 'vue-clickaway';
+// import { mixin as clickaway } from 'vue-clickaway';
 import WootDropdownItem from 'shared/components/ui/dropdown/DropdownItem.vue';
 import WootDropdownMenu from 'shared/components/ui/dropdown/DropdownMenu.vue';
 export default {
@@ -50,7 +50,7 @@ export default {
     WootDropdownItem,
     WootDropdownMenu,
   },
-  mixins: [clickaway],
+  mixins: [],
   props: {
     selectedInboxes: {
       type: Array,

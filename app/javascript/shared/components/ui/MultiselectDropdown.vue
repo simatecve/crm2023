@@ -60,13 +60,13 @@
 <script>
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
 import MultiselectDropdownItems from 'shared/components/ui/MultiselectDropdownItems';
-import { mixin as clickaway } from 'vue-clickaway';
+// import { mixin as clickaway } from 'vue-clickaway';
 export default {
   components: {
     Thumbnail,
     MultiselectDropdownItems,
   },
-  mixins: [clickaway],
+  mixins: [],
   props: {
     options: {
       type: Array,

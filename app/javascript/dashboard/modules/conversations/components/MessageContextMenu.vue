@@ -40,7 +40,7 @@
   </div>
 </template>
 <script>
-import { mixin as clickaway } from 'vue-clickaway';
+// import { mixin as clickaway } from 'vue-clickaway';
 
 import WootDropdownItem from 'shared/components/ui/dropdown/DropdownItem';
 import WootDropdownMenu from 'shared/components/ui/dropdown/DropdownMenu';
@@ -50,7 +50,7 @@ export default {
     WootDropdownMenu,
     WootDropdownItem,
   },
-  mixins: [clickaway],
+  mixins: [],
   props: {
     isOpen: {
       type: Boolean,

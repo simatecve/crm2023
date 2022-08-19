@@ -1,27 +1,12 @@
 <template>
   <div class="csat--table-container">
-    <ve-table
-      max-height="calc(100vh - 35rem)"
-      :fixed-header="true"
-      :columns="columns"
-      :table-data="tableData"
-    />
     <div v-show="!tableData.length" class="csat--empty-records">
       {{ $t('CSAT_REPORTS.NO_RECORDS') }}
-    </div>
-    <div v-if="metrics.totalResponseCount" class="table-pagination">
-      <ve-pagination
-        :total="metrics.totalResponseCount"
-        :page-index="pageIndex"
-        :page-size="25"
-        :page-size-option="[25]"
-        @on-page-number-change="onPageNumberChange"
-      />
     </div>
   </div>
 </template>
 <script>
-import { VeTable, VePagination } from 'vue-easytable';
+// import { VeTable, VePagination } from 'vue-easytable';
 import UserAvatarWithName from 'dashboard/components/widgets/UserAvatarWithName';
 import { CSAT_RATINGS } from 'shared/constants/messages';
 import { mapGetters } from 'vuex';
@@ -29,8 +14,8 @@ import timeMixin from 'dashboard/mixins/time';
 
 export default {
   components: {
-    VeTable,
-    VePagination,
+    // VeTable,
+    // VePagination,
   },
   mixins: [timeMixin],
   props: {

@@ -31,7 +31,7 @@
 <script>
 import AddLabel from 'shared/components/ui/dropdown/AddLabel';
 import LabelDropdown from 'shared/components/ui/label/LabelDropdown';
-import { mixin as clickaway } from 'vue-clickaway';
+// import { mixin as clickaway } from 'vue-clickaway';
 
 export default {
   components: {
@@ -39,7 +39,7 @@ export default {
     LabelDropdown,
   },
 
-  mixins: [clickaway],
+  mixins: [],
 
   props: {
     allLabels: {

@@ -1,13 +1,7 @@
 <template>
   <section class="campaigns-table-wrap">
     <empty-state v-if="showEmptyResult" :title="emptyMessage" />
-    <ve-table
-      v-else
-      :columns="columns"
-      scroll-width="190rem"
-      :table-data="tableData"
-      :border-around="true"
-    />
+
     <div v-if="isLoading" class="campaign--loader">
       <spinner />
       <span>{{ $t('CAMPAIGN.LIST.LOADING_MESSAGE') }}</span>
@@ -16,8 +10,8 @@
 </template>
 
 <script>
-import { mixin as clickaway } from 'vue-clickaway';
-import { VeTable } from 'vue-easytable';
+// import { mixin as clickaway } from 'vue-clickaway';
+// import { VeTable } from 'vue-easytable';
 import Spinner from 'shared/components/Spinner.vue';
 import Label from 'dashboard/components/ui/Label';
 import EmptyState from 'dashboard/components/widgets/EmptyState.vue';
@@ -32,10 +26,10 @@ export default {
   components: {
     EmptyState,
     Spinner,
-    VeTable,
+    // VeTable,
   },
 
-  mixins: [clickaway, timeMixin, campaignMixin, messageFormatterMixin],
+  mixins: [timeMixin, campaignMixin, messageFormatterMixin],
 
   props: {
     campaigns: {

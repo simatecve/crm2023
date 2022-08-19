@@ -1,15 +1,5 @@
 <template>
   <section class="contacts-table-wrap">
-    <ve-table
-      :fixed-header="true"
-      max-height="calc(100vh - 11.4rem)"
-      scroll-width="187rem"
-      :columns="columns"
-      :table-data="tableData"
-      :border-around="false"
-      :sort-option="sortOption"
-    />
-
     <empty-state
       v-if="showSearchEmptyState"
       :title="$t('CONTACTS_PAGE.LIST.404')"
@@ -26,8 +16,8 @@
 </template>
 
 <script>
-import { mixin as clickaway } from 'vue-clickaway';
-import { VeTable } from 'vue-easytable';
+// import { mixin as clickaway } from 'vue-clickaway';
+// import { VeTable } from 'vue-easytable';
 import { getCountryFlag } from 'dashboard/helper/flag';
 
 import Spinner from 'shared/components/Spinner.vue';
@@ -40,9 +30,9 @@ export default {
   components: {
     EmptyState,
     Spinner,
-    VeTable,
+    // VeTable,
   },
-  mixins: [clickaway, timeMixin],
+  mixins: [timeMixin],
   props: {
     contacts: {
       type: Array,

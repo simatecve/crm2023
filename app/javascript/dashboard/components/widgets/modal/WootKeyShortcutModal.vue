@@ -87,11 +87,11 @@
 </template>
 
 <script>
-import { mixin as clickaway } from 'vue-clickaway';
+// import { mixin as clickaway } from 'vue-clickaway';
 import { SHORTCUT_KEYS } from './constants';
 
 export default {
-  mixins: [clickaway],
+  mixins: [],
   data() {
     return {
       shortcutKeys: SHORTCUT_KEYS,

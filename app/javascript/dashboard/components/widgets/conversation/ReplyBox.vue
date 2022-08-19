@@ -128,7 +128,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { mixin as clickaway } from 'vue-clickaway';
+// import { mixin as clickaway } from 'vue-clickaway';
 import alertMixin from 'shared/mixins/alertMixin';
 
 import EmojiInput from 'shared/components/emoji/EmojiInput';
@@ -174,7 +174,7 @@ export default {
     WhatsappTemplates,
   },
   mixins: [
-    clickaway,
+    // clickaway,
     inboxMixin,
     uiSettingsMixin,
     alertMixin,

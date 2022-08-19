@@ -100,7 +100,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { mixin as clickaway } from 'vue-clickaway';
+// import { mixin as clickaway } from 'vue-clickaway';
 
 import NotificationPanelList from './NotificationPanelList';
 
@@ -108,7 +108,7 @@ export default {
   components: {
     NotificationPanelList,
   },
-  mixins: [clickaway],
+  mixins: [],
   data() {
     return {
       pageSize: 15,

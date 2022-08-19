@@ -48,7 +48,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { mixin as clickaway } from 'vue-clickaway';
+// import { mixin as clickaway } from 'vue-clickaway';
 
 import ChatAttachmentButton from 'widget/components/ChatAttachment.vue';
 import ChatSendButton from 'widget/components/ChatSendButton.vue';
@@ -67,7 +67,7 @@ export default {
     FluentIcon,
     ResizableTextArea,
   },
-  mixins: [clickaway, configMixin, darkModeMixin],
+  mixins: [configMixin, darkModeMixin],
   props: {
     onSendMessage: {
       type: Function,
