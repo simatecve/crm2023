@@ -204,7 +204,7 @@ export default {
     bus.$on(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
     this.fetchPortalsAndItsCategories();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     bus.$off(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
     window.removeEventListener('resize', this.handleResize);
   },

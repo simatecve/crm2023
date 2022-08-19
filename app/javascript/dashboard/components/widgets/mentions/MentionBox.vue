@@ -42,7 +42,7 @@ export default {
   mounted() {
     document.addEventListener('keydown', this.keyListener);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener('keydown', this.keyListener);
   },
   methods: {

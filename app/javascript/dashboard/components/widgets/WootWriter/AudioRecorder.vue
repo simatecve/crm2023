@@ -103,7 +103,7 @@ export default {
     this.player.on('finishRecord', this.finishRecord);
     this.player.on('playbackFinish', this.playbackFinish);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.player) {
       this.player.dispose();
     }

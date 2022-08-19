@@ -458,7 +458,7 @@ export default {
 
     this.setCCEmailFromLastChat();
   },
-  destroyed() {
+  unmounted() {
     document.removeEventListener('keydown', this.handleKeyEvents);
     document.removeEventListener('paste', this.onPaste);
   },

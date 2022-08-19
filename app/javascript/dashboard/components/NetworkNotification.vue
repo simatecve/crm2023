@@ -51,7 +51,7 @@ export default {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('offline', this.updateOnlineStatus);
   },
 

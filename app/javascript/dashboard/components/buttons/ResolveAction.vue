@@ -178,7 +178,7 @@ export default {
     bus.$on(CMD_REOPEN_CONVERSATION, this.onCmdOpenConversation);
     bus.$on(CMD_RESOLVE_CONVERSATION, this.onCmdResolveConversation);
   },
-  destroyed() {
+  unmounted() {
     bus.$off(CMD_SNOOZE_CONVERSATION, this.onCmdSnoozeConversation);
     bus.$off(CMD_REOPEN_CONVERSATION, this.onCmdOpenConversation);
     bus.$off(CMD_RESOLVE_CONVERSATION, this.onCmdResolveConversation);

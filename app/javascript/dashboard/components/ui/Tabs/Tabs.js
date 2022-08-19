@@ -16,7 +16,7 @@ export default {
   created() {
     window.addEventListener('resize', this.computeScrollWidth);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.computeScrollWidth);
   },
   mounted() {

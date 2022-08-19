@@ -293,7 +293,7 @@ export default {
     this.addScrollListener();
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.removeBusListeners();
     this.removeScrollListener();
   },

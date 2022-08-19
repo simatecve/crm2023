@@ -43,7 +43,7 @@ export default {
     document.addEventListener('keydown', this.onMetaEnter);
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener('keydown', this.onMetaEnter);
   },
 

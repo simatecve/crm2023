@@ -66,7 +66,7 @@ export default {
     bus.$on(CMD_UNMUTE_CONVERSATION, this.unmute);
     bus.$on(CMD_SEND_TRANSCRIPT, this.toggleEmailActionsModal);
   },
-  destroyed() {
+  unmounted() {
     bus.$off(CMD_MUTE_CONVERSATION, this.mute);
     bus.$off(CMD_UNMUTE_CONVERSATION, this.unmute);
     bus.$off(CMD_SEND_TRANSCRIPT, this.toggleEmailActionsModal);

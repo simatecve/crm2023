@@ -32,7 +32,7 @@ export default {
   mounted() {
     bus.$on('newToastMessage', this.onNewToastMessage);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     bus.$off('newToastMessage', this.onNewToastMessage);
   },
   methods: {
