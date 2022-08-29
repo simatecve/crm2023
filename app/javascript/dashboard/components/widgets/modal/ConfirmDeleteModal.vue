@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators';
+// import { required } from 'vuelidate/lib/validators';
 import Modal from '../../Modal';
 
 export default {
@@ -67,7 +67,7 @@ export default {
   },
   validations: {
     value: {
-      required,
+      // required,
       isEqual(value) {
         return value === this.confirmValue;
       },

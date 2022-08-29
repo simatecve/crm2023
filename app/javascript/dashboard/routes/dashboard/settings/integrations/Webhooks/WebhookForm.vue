@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { required, url, minLength } from 'vuelidate/lib/validators';
+// import { required, url, minLength } from 'vuelidate/lib/validators';
 import webhookMixin from './webhookMixin';
 
 const SUPPORTED_WEBHOOK_EVENTS = [
@@ -81,12 +81,12 @@ export default {
   },
   validations: {
     url: {
-      required,
-      minLength: minLength(7),
-      url,
+      // required,
+      // minLength: minLength(7),
+      // url,
     },
     subscriptions: {
-      required,
+      // required,
     },
   },
   data() {

@@ -81,7 +81,7 @@
 import { mapGetters } from 'vuex';
 import Modal from 'dashboard/components/Modal';
 import alertMixin from 'shared/mixins/alertMixin';
-import { required } from 'vuelidate/lib/validators';
+// import { required } from 'vuelidate/lib/validators';
 import { convertToPortalSlug } from 'dashboard/helper/commons.js';
 
 export default {
@@ -121,10 +121,10 @@ export default {
   },
   validations: {
     name: {
-      required,
+      // required,
     },
     slug: {
-      required,
+      // required,
     },
   },
   methods: {

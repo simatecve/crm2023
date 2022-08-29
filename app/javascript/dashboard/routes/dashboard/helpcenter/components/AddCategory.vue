@@ -69,7 +69,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import alertMixin from 'shared/mixins/alertMixin';
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 import { convertToCategorySlug } from 'dashboard/helper/commons.js';
 
 export default {
@@ -97,11 +97,11 @@ export default {
   },
   validations: {
     name: {
-      required,
-      minLength: minLength(2),
+      // required,
+      // minLength: minLength(2),
     },
     slug: {
-      required,
+      // required,
     },
   },
   computed: {

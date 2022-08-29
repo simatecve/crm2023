@@ -78,7 +78,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { minValue } from 'vuelidate/lib/validators';
+// import { minValue } from 'vuelidate/lib/validators';
 import alertMixin from 'shared/mixins/alertMixin';
 import configMixin from 'shared/mixins/configMixin';
 import SettingsSection from '../../../../../components/SettingsSection';
@@ -184,7 +184,7 @@ export default {
       },
     },
     maxAssignmentLimit: {
-      minValue: minValue(1),
+      // minValue: minValue(1),
     },
   },
 };

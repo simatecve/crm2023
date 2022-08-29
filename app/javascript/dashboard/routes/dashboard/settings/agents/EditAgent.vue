@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
 import WootSubmitButton from '../../../../components/buttons/FormSubmitButton';
 import Modal from '../../../../components/Modal';
@@ -114,11 +114,11 @@ export default {
   },
   validations: {
     agentName: {
-      required,
-      minLength: minLength(1),
+      // required,
+      // minLength: minLength(1),
     },
     agentType: {
-      required,
+      // required,
     },
   },
   computed: {

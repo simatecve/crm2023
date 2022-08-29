@@ -115,7 +115,7 @@ import {
   DuplicateContactException,
   ExceptionWithMessage,
 } from 'shared/helpers/CustomErrors';
-import { required, email } from 'vuelidate/lib/validators';
+// import { required, email } from 'vuelidate/lib/validators';
 
 import { isPhoneE164OrEmpty } from 'shared/helpers/Validators';
 
@@ -160,11 +160,11 @@ export default {
   },
   validations: {
     name: {
-      required,
+      // required,
     },
     description: {},
     email: {
-      email,
+      // email,
     },
     companyName: {},
     phoneNumber: {

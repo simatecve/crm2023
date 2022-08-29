@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
 import alertMixin from 'shared/mixins/alertMixin';
 
@@ -73,8 +73,8 @@ export default {
   },
   validations: {
     accountName: {
-      required,
-      minLength: minLength(1),
+      // required,
+      // minLength: minLength(1),
     },
   },
   computed: {

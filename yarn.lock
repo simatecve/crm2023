@@ -3372,6 +3372,20 @@
     lodash "^4.17.15"
     pretty "^2.0.0"
 
+"@vuelidate/core@^2.0.0-alpha.44":
+  version "2.0.0-alpha.44"
+  resolved "https://registry.npmjs.org/@vuelidate/core/-/core-2.0.0-alpha.44.tgz#2ef61631fef542fb7827a0b0cfd5a4ed9dd5dc6d"
+  integrity sha512-3DlCe3E0RRXbB+OfPacUetKhLmXzmnjeHkzjnbkc03p06mKm6h9pXR5pd6Mv4s4tus4sieuKDb2YWNmKK6rQeA==
+  dependencies:
+    vue-demi "^0.13.4"
+
+"@vuelidate/validators@^2.0.0-alpha.31":
+  version "2.0.0-alpha.31"
+  resolved "https://registry.npmjs.org/@vuelidate/validators/-/validators-2.0.0-alpha.31.tgz#04d63307bc0a12db9f7ad94243350b83aacee998"
+  integrity sha512-+MFA9nZ7Y9zCpq383/voPDk/hiAmu6KqiJJhLOYB/FmrUPVoyKnuKnI9Bwiq8ok9GZlVkI8BnIrKPKGj9QpwiQ==
+  dependencies:
+    vue-demi "^0.13.4"
+
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.11.1.tgz#2bfd767eae1a6996f432ff7e8d7fc75679c0b6a7"
@@ -15674,6 +15688,11 @@ vue-color@2.8.1:
     material-colors "^1.0.0"
     tinycolor2 "^1.1.2"
 
+vue-demi@^0.13.4:
+  version "0.13.11"
+  resolved "https://registry.npmjs.org/vue-demi/-/vue-demi-0.13.11.tgz#7d90369bdae8974d87b1973564ad390182410d99"
+  integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
+
 vue-docgen-api@^4.44.15:
   version "4.47.0"
   resolved "https://registry.yarnpkg.com/vue-docgen-api/-/vue-docgen-api-4.47.0.tgz#605a797886dbe1c941ea73af5f2ba23090722e81"
@@ -15816,11 +15835,6 @@ vuedraggable@^2.24.3:
   integrity sha512-6/HDXi92GzB+Hcs9fC6PAAozK1RLt1ewPTLjK0anTYguXLAeySDmcnqE8IC0xa7shvSzRjQXq3/+dsZ7ETGF3g==
   dependencies:
     sortablejs "1.10.2"
-
-vuelidate@0.7.7:
-  version "0.7.7"
-  resolved "https://registry.yarnpkg.com/vuelidate/-/vuelidate-0.7.7.tgz#5df3930a63ddecf56fde7bdacea9dbaf0c9bf899"
-  integrity sha512-pT/U2lDI67wkIqI4tum7cMSIfGcAMfB+Phtqh2ttdXURwvHRBJEAQ0tVbUsW9Upg83Q5QH59bnCoXI7A9JDGnA==
 
 vuex-router-sync@~4.1.2:
   version "4.1.3"

@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators';
+// import { required } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
 
 import WootMessageEditor from 'dashboard/components/widgets/WootWriter/Editor';
@@ -57,7 +57,7 @@ export default {
   },
   validations: {
     messageSignature: {
-      required,
+      // required,
     },
   },
   computed: {

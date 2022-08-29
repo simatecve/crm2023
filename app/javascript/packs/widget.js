@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuelidate from 'vuelidate';
+// import Vuelidate from 'vuelidate';
 import VueI18n from 'vue-i18n';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
 import VueFormulate from '@braid/vue-formulate';
@@ -11,7 +11,7 @@ import { isPhoneE164OrEmpty } from 'shared/helpers/Validators';
 import router from '../widget/router';
 import { domPurifyConfig } from '../shared/helpers/HTMLSanitizer';
 Vue.use(VueI18n);
-Vue.use(Vuelidate);
+// Vue.use(Vuelidate);
 Vue.use(VueDOMPurifyHTML, domPurifyConfig);
 
 const i18nConfig = new VueI18n({

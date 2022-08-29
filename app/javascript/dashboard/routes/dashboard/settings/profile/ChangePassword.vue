@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
 import alertMixin from 'shared/mixins/alertMixin';
 
@@ -86,13 +86,13 @@ export default {
   },
   validations: {
     currentPassword: {
-      required,
+      // required,
     },
     password: {
-      minLength: minLength(6),
+      // minLength: minLength(6),
     },
     passwordConfirmation: {
-      minLength: minLength(6),
+      // minLength: minLength(6),
       isEqPassword(value) {
         if (value !== this.password) {
           return false;

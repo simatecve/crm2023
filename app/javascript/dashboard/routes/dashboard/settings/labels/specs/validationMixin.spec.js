@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import VueI18n from 'vue-i18n';
-import Vuelidate from 'vuelidate';
+// import Vuelidate from 'vuelidate';
 
 import validationMixin from '../validationMixin';
 import validations from '../validations';
@@ -8,7 +8,7 @@ import i18n from 'dashboard/i18n';
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
-localVue.use(Vuelidate);
+// localVue.use(Vuelidate);
 const i18nConfig = new VueI18n({
   locale: 'en',
   messages: i18n,

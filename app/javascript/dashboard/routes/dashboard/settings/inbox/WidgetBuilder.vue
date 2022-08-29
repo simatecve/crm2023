@@ -157,7 +157,7 @@ import { mapGetters } from 'vuex';
 import Widget from 'dashboard/modules/widget-preview/components/Widget';
 import InputRadioGroup from './components/InputRadioGroup';
 import alertMixin from 'shared/mixins/alertMixin';
-import { required } from 'vuelidate/lib/validators';
+// import { required } from 'vuelidate/lib/validators';
 import {
   LocalStorage,
   LOCAL_STORAGE_KEYS,
@@ -299,7 +299,7 @@ export default {
     this.setDefaults();
   },
   validations: {
-    websiteName: { required },
+    websiteName: {},
   },
   methods: {
     setDefaults() {

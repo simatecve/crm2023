@@ -131,7 +131,7 @@ import WhatsappTemplates from './WhatsappTemplates.vue';
 import alertMixin from 'shared/mixins/alertMixin';
 import { INBOX_TYPES } from 'shared/mixins/inboxMixin';
 import { ExceptionWithMessage } from 'shared/helpers/CustomErrors';
-import { required, requiredIf } from 'vuelidate/lib/validators';
+// import { required, requiredIf } from 'vuelidate/lib/validators';
 
 export default {
   components: {
@@ -167,13 +167,13 @@ export default {
   },
   validations: {
     subject: {
-      required: requiredIf('isAnEmailInbox'),
+      // required: requiredIf('isAnEmailInbox'),
     },
     message: {
-      required,
+      // required,
     },
     targetInbox: {
-      required,
+      // required,
     },
   },
   computed: {

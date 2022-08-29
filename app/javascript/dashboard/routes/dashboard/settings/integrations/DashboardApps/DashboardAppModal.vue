@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { required, url } from 'vuelidate/lib/validators';
+// import { required, url } from 'vuelidate/lib/validators';
 import alertMixin from 'shared/mixins/alertMixin';
 
 export default {
@@ -77,10 +77,16 @@ export default {
   },
   validations: {
     app: {
-      title: { required },
+      title: {
+        // required
+      },
       content: {
-        type: { required },
-        url: { required, url },
+        type: {
+          // required
+        },
+        url: {
+          //  required, url
+        },
       },
     },
   },

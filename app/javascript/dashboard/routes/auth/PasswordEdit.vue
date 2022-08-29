@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 import Auth from '../../api/auth';
 
 import WootSubmitButton from '../../components/buttons/FormSubmitButton';
@@ -85,12 +85,12 @@ export default {
   validations: {
     credentials: {
       password: {
-        required,
-        minLength: minLength(6),
+        // required,
+        // minLength: minLength(6),
       },
       confirmPassword: {
-        required,
-        minLength: minLength(6),
+        // required,
+        // minLength: minLength(6),
         isEqPassword(value) {
           if (value !== this.credentials.password) {
             return false;

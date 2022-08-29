@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { required, minLength, email } from 'vuelidate/lib/validators';
+// import { required, minLength, email } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
 import { clearCookiesOnLogout } from '../../../../store/utils/api';
 import NotificationSettings from './NotificationSettings';
@@ -123,13 +123,13 @@ export default {
   },
   validations: {
     name: {
-      required,
-      minLength: minLength(1),
+      // required,
+      // minLength: minLength(1),
     },
     displayName: {},
     email: {
-      required,
-      email,
+      // required,
+      // email,
     },
   },
   computed: {

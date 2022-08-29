@@ -85,7 +85,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 import { ATTRIBUTE_TYPES } from './constants';
 import alertMixin from 'shared/mixins/alertMixin';
 export default {
@@ -116,17 +116,17 @@ export default {
   },
   validations: {
     displayName: {
-      required,
+      // required,
     },
     attributeType: {
-      required,
+      // required,
     },
     description: {
-      required,
-      minLength: minLength(1),
+      // required,
+      // minLength: minLength(1),
     },
     attributeKey: {
-      required,
+      // required,
       isKey(value) {
         return !(value.indexOf(' ') >= 0);
       },

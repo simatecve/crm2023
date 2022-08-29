@@ -3,10 +3,10 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import { templates } from './fixtures';
 const localVue = createLocalVue();
 import VueI18n from 'vue-i18n';
-import Vue from 'vue';
+// import Vue from 'vue';
 
-import Vuelidate from 'vuelidate';
-Vue.use(Vuelidate);
+// import Vuelidate from 'vuelidate';
+// Vue.use(Vuelidate);
 
 import i18n from 'dashboard/i18n';
 

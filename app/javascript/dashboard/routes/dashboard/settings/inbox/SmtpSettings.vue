@@ -91,7 +91,7 @@
 import { mapGetters } from 'vuex';
 import alertMixin from 'shared/mixins/alertMixin';
 import SettingsSection from 'dashboard/components/SettingsSection';
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 import InputRadioGroup from './components/InputRadioGroup';
 import SingleSelectDropdown from './components/SingleSelectDropdown';
 
@@ -142,14 +142,13 @@ export default {
     };
   },
   validations: {
-    address: { required },
+    address: {},
     port: {
-      required,
-      minLength: minLength(2),
+      // minLength: minLength(2),
     },
-    login: { required },
-    password: { required },
-    domain: { required },
+    login: {},
+    password: {},
+    domain: {},
   },
   computed: {
     ...mapGetters({ uiFlags: 'inboxes/getUIFlags' }),

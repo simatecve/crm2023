@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 
 import WootSubmitButton from '../../../../components/buttons/FormSubmitButton';
 import Modal from '../../../../components/Modal';
@@ -86,11 +86,11 @@ export default {
   },
   validations: {
     shortCode: {
-      required,
-      minLength: minLength(2),
+      // required,
+      // minLength: minLength(2),
     },
     content: {
-      required,
+      // required,
     },
   },
   methods: {

@@ -73,7 +73,7 @@
 import { mapGetters } from 'vuex';
 import alertMixin from 'shared/mixins/alertMixin';
 import SettingsSection from 'dashboard/components/SettingsSection';
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 
 export default {
   components: {
@@ -97,10 +97,10 @@ export default {
     };
   },
   validations: {
-    address: { required },
-    port: { required, minLength: minLength(2) },
-    login: { required },
-    password: { required },
+    address: {},
+    port: {},
+    login: {},
+    password: {},
   },
   computed: {
     ...mapGetters({ uiFlags: 'inboxes/getUIFlags' }),

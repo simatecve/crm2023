@@ -45,7 +45,7 @@ const allKeysRequired = value => {
   const keys = Object.keys(value);
   return keys.every(key => value[key]);
 };
-import { requiredIf } from 'vuelidate/lib/validators';
+// import { requiredIf } from 'vuelidate/lib/validators';
 export default {
   props: {
     template: {
@@ -55,7 +55,7 @@ export default {
   },
   validations: {
     processedParams: {
-      requiredIfKeysPresent: requiredIf('variables'),
+      // requiredIfKeysPresent: requiredIf('variables'),
       allKeysRequired,
     },
   },

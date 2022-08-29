@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { required, minLength, email } from 'vuelidate/lib/validators';
+// import { required, minLength, email } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -101,15 +101,15 @@ export default {
   },
   validations: {
     agentName: {
-      required,
-      minLength: minLength(1),
+      // required,
+      // minLength: minLength(1),
     },
     agentEmail: {
-      required,
-      email,
+      // required,
+      // email,
     },
     agentType: {
-      required,
+      // required,
     },
   },
 

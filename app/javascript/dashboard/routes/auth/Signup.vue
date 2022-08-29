@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import { required, minLength, email } from 'vuelidate/lib/validators';
+// import { required, minLength, email } from 'vuelidate/lib/validators';
 import Auth from '../../api/auth';
 import { mapGetters } from 'vuex';
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
@@ -126,21 +126,21 @@ export default {
   validations: {
     credentials: {
       accountName: {
-        required,
-        minLength: minLength(2),
+        // required,
+        // minLength: minLength(2),
       },
       fullName: {
-        required,
-        minLength: minLength(2),
+        // required,
+        // minLength: minLength(2),
       },
       email: {
-        required,
-        email,
+        // required,
+        // email,
       },
       password: {
-        required,
+        // required,
         isValidPassword,
-        minLength: minLength(6),
+        // minLength: minLength(6),
       },
     },
   },

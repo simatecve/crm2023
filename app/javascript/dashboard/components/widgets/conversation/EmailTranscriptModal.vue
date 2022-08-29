@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { required, minLength, email } from 'vuelidate/lib/validators';
+// import { required, minLength, email } from 'vuelidate/lib/validators';
 import alertMixin from 'shared/mixins/alertMixin';
 export default {
   mixins: [alertMixin],
@@ -95,13 +95,13 @@ export default {
       isSubmitting: false,
     };
   },
-  validations: {
-    email: {
-      required,
-      email,
-      minLength: minLength(4),
-    },
-  },
+  // validations: {
+  //   email: {
+  //     // required,
+  //     // email,
+  //     // minLength: minLength(4),
+  //   },
+  // },
   computed: {
     sentToOtherEmailAddress() {
       return this.selectedType === 'other_email_address';

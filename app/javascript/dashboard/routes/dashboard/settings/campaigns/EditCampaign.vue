@@ -111,7 +111,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { required, url, minLength } from 'vuelidate/lib/validators';
+// import { required, url, minLength } from 'vuelidate/lib/validators';
 import WootMessageEditor from 'dashboard/components/widgets/WootWriter/Editor';
 import alertMixin from 'shared/mixins/alertMixin';
 import campaignMixin from 'shared/mixins/campaignMixin';
@@ -142,24 +142,24 @@ export default {
   },
   validations: {
     title: {
-      required,
+      // required,
     },
     message: {
-      required,
+      // required,
     },
     selectedSender: {
-      required,
+      // required,
     },
     endPoint: {
-      required,
-      minLength: minLength(7),
-      url,
+      // required,
+      // minLength: minLength(7),
+      // url,
     },
     timeOnPage: {
-      required,
+      // required,
     },
     selectedInbox: {
-      required,
+      // required,
     },
   },
   computed: {

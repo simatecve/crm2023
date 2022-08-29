@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 import { mapGetters } from 'vuex';
 import { convertToAttributeSlug } from 'dashboard/helper/commons.js';
 import { ATTRIBUTE_MODELS, ATTRIBUTE_TYPES } from './constants';
@@ -167,20 +167,20 @@ export default {
 
   validations: {
     displayName: {
-      required,
-      minLength: minLength(1),
+      // required,
+      // minLength: minLength(1),
     },
     description: {
-      required,
+      // required,
     },
     attributeModel: {
-      required,
+      // required,
     },
     attributeType: {
-      required,
+      // required,
     },
     attributeKey: {
-      required,
+      // required,
       isKey(value) {
         return !(value.indexOf(' ') >= 0);
       },

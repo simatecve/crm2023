@@ -116,7 +116,7 @@
 
 <script>
 import format from 'date-fns/format';
-import { required, url } from 'vuelidate/lib/validators';
+// import { required, url } from 'vuelidate/lib/validators';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import MultiselectDropdown from 'shared/components/ui/MultiselectDropdown.vue';
 import { isValidURL } from '../helper/URLHelper';
@@ -206,16 +206,16 @@ export default {
     },
   },
 
-  validations() {
-    if (this.isAttributeTypeLink) {
-      return {
-        editedValue: { required, url },
-      };
-    }
-    return {
-      editedValue: { required },
-    };
-  },
+  // validations() {
+  //   if (this.isAttributeTypeLink) {
+  //     return {
+  //       editedValue: { required, url },
+  //     };
+  //   }
+  //   return {
+  //     editedValue: { required },
+  //   };
+  // },
   mounted() {
     this.editedValue = this.formattedValue;
     bus.$on(BUS_EVENTS.FOCUS_CUSTOM_ATTRIBUTE, focusAttributeKey => {

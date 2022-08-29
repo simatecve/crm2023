@@ -77,7 +77,7 @@
 <script>
 /* eslint-env browser */
 /* global FB */
-import { required } from 'vuelidate/lib/validators';
+// import { required } from 'vuelidate/lib/validators';
 import LoadingState from 'dashboard/components/widgets/LoadingState';
 import { mapGetters } from 'vuex';
 import ChannelApi from '../../../../../api/channels';
@@ -108,7 +108,7 @@ export default {
 
   validations: {
     pageName: {
-      required,
+      // required,
     },
 
     selectedPage: {

@@ -38,7 +38,7 @@
 <script>
 import Modal from 'dashboard/components/Modal';
 import alertMixin from 'shared/mixins/alertMixin';
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 
 export default {
   components: {
@@ -61,12 +61,12 @@ export default {
       attributeName: '',
     };
   },
-  validations: {
-    attributeName: {
-      required,
-      minLength: minLength(2),
-    },
-  },
+  // validations: {
+  //   attributeName: {
+  //     required,
+  //     minLength: minLength(2),
+  //   },
+  // },
   computed: {
     attributeNameError() {
       if (this.$v.attributeName.$error) {

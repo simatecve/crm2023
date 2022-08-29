@@ -53,7 +53,7 @@
 
 <script>
 import alertMixin from 'shared/mixins/alertMixin';
-import { required, requiredIf } from 'vuelidate/lib/validators';
+// import { required, requiredIf } from 'vuelidate/lib/validators';
 import FilterInputBox from '../FilterInput/Index.vue';
 import languages from './advancedFilterItems/languages';
 import countries from 'shared/constants/countries.js';
@@ -77,27 +77,27 @@ export default {
       default: () => [],
     },
   },
-  validations: {
-    appliedFilters: {
-      required,
-      $each: {
-        values: {
-          ensureBetween0to999(value, prop) {
-            if (prop.filter_operator === 'days_before') {
-              return parseInt(value, 10) > 0 && parseInt(value, 10) < 999;
-            }
-            return true;
-          },
-          required: requiredIf(prop => {
-            return !(
-              prop.filter_operator === 'is_present' ||
-              prop.filter_operator === 'is_not_present'
-            );
-          }),
-        },
-      },
-    },
-  },
+  // validations: {
+  //   appliedFilters: {
+  //     required,
+  //     $each: {
+  //       values: {
+  //         ensureBetween0to999(value, prop) {
+  //           if (prop.filter_operator === 'days_before') {
+  //             return parseInt(value, 10) > 0 && parseInt(value, 10) < 999;
+  //           }
+  //           return true;
+  //         },
+  //         required: requiredIf(prop => {
+  //           return !(
+  //             prop.filter_operator === 'is_present' ||
+  //             prop.filter_operator === 'is_not_present'
+  //           );
+  //         }),
+  //       },
+  //     },
+  //   },
+  // },
   data() {
     return {
       show: true,

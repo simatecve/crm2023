@@ -27,7 +27,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { required, email } from 'vuelidate/lib/validators';
+// import { required, email } from 'vuelidate/lib/validators';
 
 import FluentIcon from 'shared/components/FluentIcon/Index.vue';
 import Spinner from 'shared/components/Spinner';
@@ -77,8 +77,8 @@ export default {
   },
   validations: {
     email: {
-      required,
-      email,
+      // required,
+      // email,
     },
   },
   methods: {

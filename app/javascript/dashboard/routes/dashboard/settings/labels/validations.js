@@ -1,16 +1,16 @@
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 
 export const validLabelCharacters = (str = '') => !!str && !str.includes(' ');
 
 export default {
   title: {
-    required,
-    minLength: minLength(2),
+    // required,
+    // minLength: minLength(2),
     validLabelCharacters,
   },
   description: {},
   color: {
-    required,
+    // required,
   },
   showOnSidebar: {},
 };

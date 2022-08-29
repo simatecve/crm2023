@@ -144,7 +144,7 @@
 
 <script>
 import alertMixin from 'shared/mixins/alertMixin';
-import { required, requiredIf } from 'vuelidate/lib/validators';
+// import { required, requiredIf } from 'vuelidate/lib/validators';
 import filterInputBox from 'dashboard/components/widgets/FilterInput/Index.vue';
 import automationActionInput from 'dashboard/components/widgets/AutomationActionInput.vue';
 import languages from 'dashboard/components/widgets/conversation/advancedFilterItems/languages';
@@ -176,40 +176,40 @@ export default {
   validations: {
     automation: {
       name: {
-        required,
+        // required,
       },
       description: {
-        required,
+        // required,
       },
       event_name: {
-        required,
+        // required,
       },
       conditions: {
-        required,
-        $each: {
-          values: {
-            required: requiredIf(prop => {
-              return !(
-                prop.filter_operator === 'is_present' ||
-                prop.filter_operator === 'is_not_present'
-              );
-            }),
-          },
-        },
+        // required,
+        // $each: {
+        //   values: {
+        //     required: requiredIf(prop => {
+        //       return !(
+        //         prop.filter_operator === 'is_present' ||
+        //         prop.filter_operator === 'is_not_present'
+        //       );
+        //     }),
+        //   },
+        // },
       },
       actions: {
-        required,
-        $each: {
-          action_params: {
-            required: requiredIf(prop => {
-              return !(
-                prop.action_name === 'mute_conversation' ||
-                prop.action_name === 'snooze_conversation' ||
-                prop.action_name === 'resolve_conversation'
-              );
-            }),
-          },
-        },
+        // required,
+        // $each: {
+        //   action_params: {
+        //     required: requiredIf(prop => {
+        //       return !(
+        //         prop.action_name === 'mute_conversation' ||
+        //         prop.action_name === 'snooze_conversation' ||
+        //         prop.action_name === 'resolve_conversation'
+        //       );
+        //     }),
+        //   },
+        // },
       },
     },
   },

@@ -35,7 +35,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import alertMixin from 'shared/mixins/alertMixin';
-import { required } from 'vuelidate/lib/validators';
+// import { required } from 'vuelidate/lib/validators';
 import router from '../../../../index';
 import PageHeader from '../../SettingsSubPageHeader';
 
@@ -55,7 +55,7 @@ export default {
     }),
   },
   validations: {
-    botToken: { required },
+    botToken: {},
   },
   methods: {
     async createChannel() {

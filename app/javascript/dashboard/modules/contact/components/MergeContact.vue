@@ -108,7 +108,7 @@
 
 <script>
 import alertMixin from 'shared/mixins/alertMixin';
-import { required } from 'vuelidate/lib/validators';
+// import { required } from 'vuelidate/lib/validators';
 
 import MergeContactSummary from 'dashboard/modules/contact/components/MergeContactSummary';
 import ContactDropdownItem from './ContactDropdownItem';
@@ -136,10 +136,10 @@ export default {
   },
   validations: {
     primaryContact: {
-      required,
+      // required,
     },
     childContact: {
-      required,
+      // required,
     },
   },
   data() {

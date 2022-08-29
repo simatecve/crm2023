@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators';
+// import { required, minLength } from 'vuelidate/lib/validators';
 import alertMixin from 'shared/mixins/alertMixin';
 
 export default {
@@ -64,8 +64,8 @@ export default {
 
   validations: {
     name: {
-      required,
-      minLength: minLength(1),
+      // required,
+      // minLength: minLength(1),
     },
   },
 

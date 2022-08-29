@@ -112,7 +112,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import alertMixin from 'shared/mixins/alertMixin';
-import { required } from 'vuelidate/lib/validators';
+// import { required } from 'vuelidate/lib/validators';
 import router from '../../../../index';
 
 const shouldStartWithPlusSign = (value = '') => value.startsWith('+');
@@ -136,12 +136,12 @@ export default {
     }),
   },
   validations: {
-    inboxName: { required },
-    phoneNumber: { required, shouldStartWithPlusSign },
-    apiKey: { required },
-    apiSecret: { required },
-    applicationId: { required },
-    accountId: { required },
+    inboxName: {},
+    phoneNumber: { shouldStartWithPlusSign },
+    apiKey: {},
+    apiSecret: {},
+    applicationId: {},
+    accountId: {},
   },
   methods: {
     async createChannel() {

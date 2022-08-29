@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { required, minLength, email } from 'vuelidate/lib/validators';
+// import { required, minLength, email } from 'vuelidate/lib/validators';
 import Auth from '../../api/auth';
 
 export default {
@@ -49,9 +49,9 @@ export default {
   validations: {
     credentials: {
       email: {
-        required,
-        email,
-        minLength: minLength(4),
+        // required,
+        // email,
+        // minLength: minLength(4),
       },
     },
   },
