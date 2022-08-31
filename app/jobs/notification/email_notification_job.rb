@@ -5,6 +5,7 @@ class Notification::EmailNotificationJob < ApplicationJob
     # no need to send email if notification has been read already
     return if notification.read_at.present?
 
-    Notification::EmailNotificationService.new(notification: notification).perform
+    # suspending email notifications temporarily for now
+    # Notification::EmailNotificationService.new(notification: notification).perform
   end
 end
