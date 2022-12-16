@@ -1,3 +1,14 @@
+// Import only the scales you need
+@import "@radix-ui/colors/gray.css";
+@import "@radix-ui/colors/blue.css";
+@import "@radix-ui/colors/green.css";
+@import "@radix-ui/colors/red.css";
+@import "@radix-ui/colors/grayDark.css";
+@import "@radix-ui/colors/blueDark.css";
+@import "@radix-ui/colors/greenDark.css";
+@import "@radix-ui/colors/redDark.css";
+
+
 :root {
   --white: #fff;
   --white-transparent: rgba(255, 255, 255, 0.9);
