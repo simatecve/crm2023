@@ -1,8 +1,5 @@
 <template>
-  <li
-    v-if="hasAttachments || data.content || isEmailContentType"
-    :class="alignBubble"
-  >
+  <li v-if="shouldRenderMessage" :class="alignBubble">
     <div :class="wrapClass">
       <div v-tooltip.top-start="messageToolTip" :class="bubbleClass">
         <bubble-mail-head
@@ -18,6 +15,7 @@
           :readable-time="readableTime"
           :display-quoted-button="displayQuotedButton"
         />
+
         <span
           v-if="isPending && hasAttachments"
           class="chat-bubble has-attachment agent"
@@ -183,6 +181,17 @@ export default {
     };
   },
   computed: {
+    shouldRenderMessage() {
+      return (
+        this.hasAttachments ||
+        this.data.content ||
+        this.isEmailContentType ||
+        this.isAnIntegrationMessage
+      );
+    },
+    isAnIntegrationMessage() {
+      return this.data.contentType === 'integrations';
+    },
     emailMessageContent() {
       const {
         html_content: { full: fullHTMLContent } = {},

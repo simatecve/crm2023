@@ -114,6 +114,7 @@
       :show-editor-toggle="isAPIInbox && !isOnPrivateNote"
       :enable-multiple-file-upload="enableMultipleFileUpload"
       :has-whatsapp-templates="hasWhatsappTemplates"
+      :conversation-id="conversationId"
       @selectWhatsappTemplate="openWhatsappTemplateModal"
       @toggle-editor="toggleRichContentEditor"
     />

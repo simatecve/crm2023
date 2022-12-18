@@ -38,7 +38,7 @@ class CsmlEngine
   def process_response(response)
     return response.parsed_response if response.success?
 
-    { error: response.parsed_response, status: response.code }
+    { error: response.parsed_response, status: response.code }.to_h
   end
 
   def post(path, payload)
