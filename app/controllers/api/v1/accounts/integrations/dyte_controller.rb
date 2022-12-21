@@ -10,7 +10,7 @@ class Api::V1::Accounts::Integrations::DyteController < Api::V1::Accounts::BaseC
   def add_participant_to_meeting
     return render json: { error: 'Invalid Data' }, status: :unprocessable_entity if @message.content_type == 'integations'
 
-    response= dyte_processor_service.add_participant_to_meeting(@message.content_attributes['data']['meeting_id'], Current.user)
+    response = dyte_processor_service.add_participant_to_meeting(@message.content_attributes['data']['meeting_id'], Current.user)
     render json: response
   end
 

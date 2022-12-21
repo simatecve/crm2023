@@ -28,14 +28,14 @@ class Integrations::Dyte::ProcessorService
   end
 
   def add_participant_to_meeting(meeting_id, user)
-    response = dyte_client.add_participant_to_meeting(meeting_id, user.id, user.name, avatar_url(user))
-    response
+    dyte_client.add_participant_to_meeting(meeting_id, user.id, user.name, avatar_url(user))
   end
 
   private
 
   def avatar_url(user)
     return user.avatar_url if user.avatar_url.present?
+
     "#{ENV.fetch('FRONTEND_URL', nil)}/integrations/slack/user.png"
   end
 

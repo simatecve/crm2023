@@ -29,7 +29,7 @@ class Api::V1::Widget::MessagesController < Api::V1::Widget::BaseController
   def add_participant_to_meeting
     return render json: { error: 'Invalid Data' }, status: :unprocessable_entity if @message.content_type == 'integations'
 
-    response= dyte_processor_service.add_participant_to_meeting(@message.content_attributes['data']['meeting_id'], @message.conversation.contact)
+    response = dyte_processor_service.add_participant_to_meeting(@message.content_attributes['data']['meeting_id'], @message.conversation.contact)
     render json: response
   end
 
@@ -38,7 +38,6 @@ class Api::V1::Widget::MessagesController < Api::V1::Widget::BaseController
   def dyte_processor_service
     Integrations::Dyte::ProcessorService.new(account: @web_widget.inbox.account, conversation: @message)
   end
-
 
   def build_attachment
     return if params[:message][:attachments].blank?
