@@ -6,7 +6,7 @@
       @click="insertMentionNode"
     />
     <canned-response
-      v-if="showCannedMenu && !isPrivate"
+      v-if="shouldShowCannedResponses"
       :search-key="cannedSearchTerm"
       @click="insertCannedResponse"
     />
@@ -80,7 +80,8 @@ export default {
     enableSuggestions: { type: Boolean, default: true },
     overrideLineBreaks: { type: Boolean, default: false },
     updateSelectionWith: { type: String, default: '' },
-    enableVariables: { type: Boolean, default: true },
+    enableVariables: { type: Boolean, default: false },
+    enableCannedResponses: { type: Boolean, default: true },
   },
   data() {
     return {
@@ -103,6 +104,11 @@ export default {
     },
     shouldShowVariables() {
       return this.enableVariables && this.showVariables && !this.isPrivate;
+    },
+    shouldShowCannedResponses() {
+      return (
+        this.enableCannedResponses && this.showCannedMenu && !this.isPrivate
+      );
     },
     plugins() {
       if (!this.enableSuggestions) {
