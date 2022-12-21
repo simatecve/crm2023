@@ -200,7 +200,11 @@ Rails.application.routes.draw do
         resource :config, only: [:create]
         resources :campaigns, only: [:index]
         resources :events, only: [:create]
-        resources :messages, only: [:index, :create, :update]
+        resources :messages, only: [:index, :create, :update] do
+          member do
+            post :add_participant_to_meeting
+          end
+        end
         resources :conversations, only: [:index, :create] do
           collection do
             post :update_last_seen

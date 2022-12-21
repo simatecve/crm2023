@@ -82,15 +82,15 @@ dyte:
   settings_form_schema:
     [
       {
-        'label': 'API Key',
-        'type': 'text',
-        'name': 'api_key',
-        'validation': 'required',
-      },
-      {
         'label': 'Organization ID',
         'type': 'text',
         'name': 'organization_id',
+        'validation': 'required',
+      },
+      {
+        'label': 'API Key',
+        'type': 'text',
+        'name': 'api_key',
         'validation': 'required',
       },
     ]

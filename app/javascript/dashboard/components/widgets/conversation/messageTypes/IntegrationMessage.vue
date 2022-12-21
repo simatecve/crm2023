@@ -1,13 +1,14 @@
 <template>
-  <video-call
+  <dyte-video-call
     v-if="contentAttributes.type === 'dyte'"
     :message-id="messageId"
+    :meeting-data="contentAttributes.data"
   />
 </template>
 <script>
-import VideoCall from './VideoCall.vue';
+import DyteVideoCall from './DyteVideoCall.vue';
 export default {
-  components: { VideoCall },
+  components: { DyteVideoCall },
   props: {
     messageId: {
       type: Number,

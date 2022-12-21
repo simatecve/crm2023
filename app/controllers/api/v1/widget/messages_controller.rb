@@ -1,6 +1,6 @@
 class Api::V1::Widget::MessagesController < Api::V1::Widget::BaseController
   before_action :set_conversation, only: [:create]
-  before_action :set_message, only: [:update]
+  before_action :set_message, only: [:update, :add_participant_to_meeting]
 
   def index
     @messages = conversation.nil? ? [] : message_finder.perform
@@ -26,7 +26,19 @@ class Api::V1::Widget::MessagesController < Api::V1::Widget::BaseController
     render json: { error: @contact.errors, message: e.message }.to_json, status: :internal_server_error
   end
 
+  def add_participant_to_meeting
+    return render json: { error: 'Invalid Data' }, status: :unprocessable_entity if @message.content_type == 'integations'
+
+    response= dyte_processor_service.add_participant_to_meeting(@message.content_attributes['data']['meeting_id'], @message.conversation.contact)
+    render json: response
+  end
+
   private
+
+  def dyte_processor_service
+    Integrations::Dyte::ProcessorService.new(account: @web_widget.inbox.account, conversation: @message)
+  end
+
 
   def build_attachment
     return if params[:message][:attachments].blank?

@@ -17,7 +17,14 @@
         :message-id="messageId"
         :message-content-attributes="messageContentAttributes"
       />
+      <div v-if="isIntegrations">
+        <integration-card
+          :message-id="messageId"
+          :meeting-data="messageContentAttributes.data"
+        />
+      </div>
     </div>
+
     <div v-if="isOptions">
       <chat-options
         :title="message"
@@ -63,6 +70,7 @@ import ChatArticle from './template/Article';
 import EmailInput from './template/EmailInput';
 import CustomerSatisfaction from 'shared/components/CustomerSatisfaction';
 import darkModeMixin from 'widget/mixins/darkModeMixin.js';
+import IntegrationCard from './IntegrationCard';
 
 export default {
   name: 'AgentMessageBubble',
@@ -73,6 +81,7 @@ export default {
     ChatOptions,
     EmailInput,
     CustomerSatisfaction,
+    IntegrationCard,
   },
   mixins: [messageFormatterMixin, darkModeMixin],
   props: {
@@ -106,6 +115,9 @@ export default {
     },
     isCSAT() {
       return this.contentType === 'input_csat';
+    },
+    isIntegrations() {
+      return this.contentType === 'integrations';
     },
   },
   methods: {

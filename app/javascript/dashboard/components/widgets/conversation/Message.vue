@@ -15,7 +15,10 @@
           :readable-time="readableTime"
           :display-quoted-button="displayQuotedButton"
         />
-
+        <integration-message
+          :message-id="data.id"
+          :content-attributes="contentAttributes"
+        />
         <span
           v-if="isPending && hasAttachments"
           class="chat-bubble has-attachment agent"
@@ -134,7 +137,7 @@ import alertMixin from 'shared/mixins/alertMixin';
 import contentTypeMixin from 'shared/mixins/contentTypeMixin';
 import { MESSAGE_TYPE, MESSAGE_STATUS } from 'shared/constants/messages';
 import { generateBotMessageContent } from './helpers/botMessageContentHelper';
-
+import IntegrationMessage from './messageTypes/IntegrationMessage.vue';
 export default {
   components: {
     BubbleActions,
@@ -145,6 +148,7 @@ export default {
     BubbleMailHead,
     BubbleLocation,
     ContextMenu,
+    IntegrationMessage,
     Spinner,
   },
   mixins: [alertMixin, timeMixin, messageFormatterMixin, contentTypeMixin],
@@ -190,7 +194,7 @@ export default {
       );
     },
     isAnIntegrationMessage() {
-      return this.data.contentType === 'integrations';
+      return this.contentType === 'integrations';
     },
     emailMessageContent() {
       const {

@@ -2,7 +2,8 @@ class Integrations::Dyte::ProcessorService
   pattr_initialize [:account!, :conversation!]
 
   def create_a_meeting(agent)
-    response = dyte_client.create_a_meeting("Meeting with #{agent.available_name}")
+    title = I18n.t('integration_apps.dyte.meeting_name', agent_name: agent.available_name)
+    response = dyte_client.create_a_meeting(title)
 
     return if response[:error].present?
 
@@ -13,9 +14,13 @@ class Integrations::Dyte::ProcessorService
         inbox_id: conversation.inbox_id,
         message_type: :outgoing,
         content_type: :integrations,
+        content: title,
         content_attributes: {
           type: 'dyte',
-          data: { meeting_id: meeting['id'] }
+          data: {
+            meeting_id: meeting['id'],
+            room_name: meeting['roomName']
+          }
         },
         sender: agent
       }
@@ -23,10 +28,16 @@ class Integrations::Dyte::ProcessorService
   end
 
   def add_participant_to_meeting(meeting_id, user)
-    dyte_client.add_participant_to_meeting(meeting_id, user.id, user.name, user.avatar_url)
+    response = dyte_client.add_participant_to_meeting(meeting_id, user.id, user.name, avatar_url(user))
+    response
   end
 
   private
+
+  def avatar_url(user)
+    return user.avatar_url if user.avatar_url.present?
+    "#{ENV.fetch('FRONTEND_URL', nil)}/integrations/slack/user.png"
+  end
 
   def dyte_hook
     @dyte_hook ||= account.hooks.find_by!(app_id: 'dyte')

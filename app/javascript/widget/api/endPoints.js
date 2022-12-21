@@ -66,6 +66,10 @@ const updateMessage = id => ({
   url: `/api/v1/widget/messages/${id}${window.location.search}`,
 });
 
+const addParticipantToMeeting = id => ({
+  url: `/api/v1/widget/messages/${id}/add_participant_to_meeting${window.location.search}`,
+});
+
 const getAvailableAgents = token => ({
   url: '/api/v1/widget/inbox_members',
   params: {
@@ -102,4 +106,5 @@ export default {
   getAvailableAgents,
   getCampaigns,
   triggerCampaign,
+  addParticipantToMeeting,
 };

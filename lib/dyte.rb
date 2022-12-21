@@ -25,7 +25,7 @@ class Dyte
 
   def add_participant_to_meeting(meeting_id, client_id, name, avatar_url)
     payload = {
-      'clientSpecificId': client_id,
+      'clientSpecificId': client_id.to_s,
       'userDetails': {
         'name': name,
         'picture': avatar_url
