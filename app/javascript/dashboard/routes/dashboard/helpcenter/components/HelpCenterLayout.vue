@@ -40,6 +40,7 @@
         :portals="portals"
         :active-portal-slug="selectedPortalSlug"
         :active-locale="selectedLocaleInPortal"
+        @fetch-portal="fetchPortalAndItsCategories"
         @close-popover="closePortalPopover"
       />
       <add-category
@@ -227,8 +228,22 @@ export default {
   },
 
   watch: {
-    '$route.params.portalSlug'() {
-      this.fetchPortalsAndItsCategories();
+    '$route.name'() {
+      const routeName = this.$route?.name;
+      const routeParams = this.$route?.params;
+      const updateMetaInAllPortals = routeName === 'list_all_portals';
+      const updateMetaInEditArticle =
+        routeName === 'edit_article' && routeParams?.recentlyCreated;
+      const updateMetaInLocaleArticles =
+        routeName === 'list_all_locale_articles' &&
+        routeParams?.recentlyDeleted;
+      if (
+        updateMetaInAllPortals ||
+        updateMetaInEditArticle ||
+        updateMetaInLocaleArticles
+      ) {
+        this.fetchPortalAndItsCategories();
+      }
     },
   },
 
@@ -240,7 +255,7 @@ export default {
     const slug = this.$route.params.portalSlug;
     if (slug) this.lastActivePortalSlug = slug;
 
-    this.fetchPortalsAndItsCategories();
+    this.fetchPortalAndItsCategories();
   },
   beforeDestroy() {
     bus.$off(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
@@ -267,7 +282,7 @@ export default {
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen;
     },
-    async fetchPortalsAndItsCategories() {
+    async fetchPortalAndItsCategories() {
       await this.$store.dispatch('portals/index');
       const selectedPortalParam = {
         portalSlug: this.selectedPortalSlug,

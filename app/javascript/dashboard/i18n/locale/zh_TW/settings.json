@@ -103,7 +103,9 @@
           "線上的",
           "忙碌中",
           "離線的"
-        ]
+        ],
+        "SET_AVAILABILITY_SUCCESS": "Availability has been set successfully",
+        "SET_AVAILABILITY_ERROR": "Couldn't set availability, please try again"
       },
       "EMAIL": {
         "LABEL": "您的電子信箱地址",
@@ -226,6 +228,10 @@
       "CATEGORY": "Category",
       "CATEGORY_EMPTY_MESSAGE": "No categories found"
     },
+    "SET_AUTO_OFFLINE": {
+      "TEXT": "Mark offline automatically",
+      "INFO_TEXT": "Let the system automatically mark you offline when you aren't using the app or dashboard."
+    },
     "DOCS": "Read docs"
   },
   "BILLING_SETTINGS": {
@@ -257,7 +263,7 @@
     },
     "FORM": {
       "NAME": {
-        "LABEL": "帳戶名稱",
+        "LABEL": "公司名稱",
         "PLACEHOLDER": "Wayne 企業"
       },
       "SUBMIT": "送出"

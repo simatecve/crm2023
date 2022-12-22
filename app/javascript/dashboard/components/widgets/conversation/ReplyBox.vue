@@ -37,6 +37,7 @@
       <woot-audio-recorder
         v-if="showAudioRecorderEditor"
         ref="audioRecorderInput"
+        :audio-record-format="audioRecordFormat"
         @state-recorder-progress-changed="onStateProgressRecorderChanged"
         @state-recorder-changed="onStateRecorderChanged"
         @finish-record="onFinishRecorder"
@@ -147,6 +148,7 @@ import { checkFileSizeLimit } from 'shared/helpers/FileHelper';
 import {
   MAXIMUM_FILE_UPLOAD_SIZE,
   MAXIMUM_FILE_UPLOAD_SIZE_TWILIO_SMS_CHANNEL,
+  AUDIO_FORMATS,
 } from 'shared/constants/messages';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 
@@ -161,6 +163,9 @@ import { LocalStorage, LOCAL_STORAGE_KEYS } from '../../../helper/localStorage';
 import { trimContent, debounce } from '@chatwoot/utils';
 import wootConstants from 'dashboard/constants';
 import { isEditorHotKeyEnabled } from 'dashboard/mixins/uiSettings';
+import AnalyticsHelper, {
+  ANALYTICS_EVENTS,
+} from '../../../helper/AnalyticsHelper';
 
 const EmojiInput = () => import('shared/components/emoji/EmojiInput');
 
@@ -459,6 +464,12 @@ export default {
     editorStateId() {
       return `draft-${this.conversationIdByRoute}-${this.replyType}`;
     },
+    audioRecordFormat() {
+      if (this.isAWebWidgetInbox) {
+        return AUDIO_FORMATS.WEBM;
+      }
+      return AUDIO_FORMATS.OGG;
+    },
   },
   watch: {
     currentChat(conversation) {
@@ -698,6 +709,7 @@ export default {
     },
     replaceText(message) {
       setTimeout(() => {
+        AnalyticsHelper.track(ANALYTICS_EVENTS.INSERTED_A_CANNED_RESPONSE);
         this.message = message;
       }, 100);
     },

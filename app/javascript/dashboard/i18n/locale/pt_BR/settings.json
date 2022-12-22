@@ -103,7 +103,9 @@
           "Disponível",
           "Ocupado",
           "Desconectado"
-        ]
+        ],
+        "SET_AVAILABILITY_SUCCESS": "Disponibilidade foi definida com sucesso",
+        "SET_AVAILABILITY_ERROR": "Não foi possível definir a disponibilidade, por favor tente novamente"
       },
       "EMAIL": {
         "LABEL": "Seu e-mail",
@@ -226,6 +228,10 @@
       "CATEGORY": "Categoria",
       "CATEGORY_EMPTY_MESSAGE": "Nenhuma categoria encontrada"
     },
+    "SET_AUTO_OFFLINE": {
+      "TEXT": "Marcar offline automaticamente",
+      "INFO_TEXT": "Deixe o sistema marcar você automaticamente quando você não estiver usando o app ou o painel de controle."
+    },
     "DOCS": "Ler documentos"
   },
   "BILLING_SETTINGS": {
@@ -257,7 +263,7 @@
     },
     "FORM": {
       "NAME": {
-        "LABEL": "Nome do Cliente",
+        "LABEL": "Nome da empresa",
         "PLACEHOLDER": "Informe o nome da conta"
       },
       "SUBMIT": "Enviar"
