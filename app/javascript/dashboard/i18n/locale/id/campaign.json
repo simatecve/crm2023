@@ -4,7 +4,7 @@
     "SIDEBAR_TXT": "Pesan proaktif mengizinkan pelanggan untuk mengirimkan pesan keluar kepada kontak mereka yang akan memicu percakapan lebih. Klik pada <b>Tambahkan Kampanye</b> untuk membuat sebuah kampanye baru. Anda juga dapat mengedit atau menghapus kampanye yang telah ada dengan mengklik pada tombol Edit atau Delete.",
     "HEADER_BTN_TXT": {
       "ONE_OFF": "Create a one off campaign",
-      "ONGOING": "Create a ongoing campaign"
+      "ONGOING": "Create an ongoing campaign"
     },
     "ADD": {
       "TITLE": "Buat sebuah kampanye",
